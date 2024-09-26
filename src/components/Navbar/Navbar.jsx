@@ -17,6 +17,7 @@ const Navbar = () => {
         <li
           onClick={() => setMenu("Bài viết chia sẻ")}
           className={menu === "Bài viết chia sẻ" ? "active" : ""}
+          
         >
           Bài viết chia sẻ
         </li>
@@ -28,7 +29,7 @@ const Navbar = () => {
         </li>
         <li
           onClick={() => setMenu("Cửa hàng")}
-          className={menu === "Liên hệ" ? "active" : ""}
+          className={menu === "Cửa hàng" ? "active" : ""}
         >
           Cửa hàng
         </li>
