@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
 const Navbar = () => {
-  const [menu, setMenu] = useState("Phong thủy");
+  const [menu, setMenu] = useState("Trang chủ");
 
   return (
     <div className="navbar">
@@ -15,22 +15,22 @@ const Navbar = () => {
           Trang chủ
         </li>
         <li
-          onClick={() => setMenu("Phong thủy")}
-          className={menu === "Phong thủy" ? "active" : ""}
+          onClick={() => setMenu("Bài viết chia sẻ")}
+          className={menu === "Bài viết chia sẻ" ? "active" : ""}
         >
-          Phong thủy
+          Bài viết chia sẻ
         </li>
         <li
-          onClick={() => setMenu("Mua cá koi")}
-          className={menu === "Mua cá koi" ? "active" : ""}
+          onClick={() => setMenu("Quản lý cá Koi")}
+          className={menu === "Quản lý cá Koi" ? "active" : ""}
         >
-          Mua cá koi
+          Quản lý cá Koi
         </li>
         <li
-          onClick={() => setMenu("Liên hệ")}
+          onClick={() => setMenu("Cửa hàng")}
           className={menu === "Liên hệ" ? "active" : ""}
         >
-          Liên hệ
+          Cửa hàng
         </li>
       </ul>
       <div className="navbar-right">
@@ -39,7 +39,7 @@ const Navbar = () => {
           <img src={assets.basket_icon} alt="" />
           <div className="dot"></div>
         </div>
-        <button>sign in</button>
+        <button>Đăng nhập</button>
       </div>
     </div>
   );
