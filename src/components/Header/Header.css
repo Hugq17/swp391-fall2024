@@ -1,0 +1,12 @@
+.header {
+    height: 34vw;
+    margin: 30px auto;
+    background: url('/public/header_img.jpg') no-repeat;
+    background-size: cover;
+    /* Đổi từ contain sang cover */
+    background-position: center;
+    /* Đảm bảo hình ảnh được căn giữa */
+    width: 100vw;
+    /* Chiều rộng bằng 100% màn hình */
+    position: relative;
+}

@@ -1,0 +1,33 @@
+/* ImageCard.css */
+.image-card {
+    border-radius: 8px;
+    /* Bo tròn các góc */
+    overflow: hidden;
+    /* Ẩn các phần hình ảnh ra ngoài card */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    /* Đổ bóng cho card */
+    margin: 10px;
+    /* Khoảng cách giữa các card */
+    text-align: center;
+    /* Căn giữa nội dung */
+    width: 280px;
+    /* Chiều rộng card */
+    height: 280px;
+    /* Chiều cao card */
+    display: inline-block;
+    /* Hiển thị inline để căn chỉnh */
+}
+
+
+
+*/ .card-title {
+    font-size: 14px;
+    /* Kích thước chữ cho tiêu đề nhỏ hơn */
+    margin-top: 5px;
+    /* Khoảng cách giữa hình ảnh và tiêu đề */
+    color: black;
+}
+
+.image-title {
+    color: black;
+}

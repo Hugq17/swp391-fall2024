@@ -61,3 +61,19 @@
     top: -8px;
     right: -8px;
 }
+
+.navbar-link {
+    text-decoration: none;
+    /* Bỏ gạch chân */
+    color: inherit;
+    /* Kế thừa màu chữ từ cha */
+    display: block;
+    /* Đảm bảo chiếm toàn bộ chiều rộng của mục */
+    padding: 10px 15px;
+    /* Khoảng cách cho các mục menu */
+}
+
+.navbar-link:hover {
+    color: #007bff;
+    /* Thay đổi màu khi di chuột (tùy chọn) */
+}

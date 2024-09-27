@@ -1,0 +1,120 @@
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    /* Căn đều các card */
+    padding: 10px 0;
+}
+
+.card {
+    width: 280px;
+    /* Chiều rộng card */
+    height: 280px;
+    /* Chiều cao card */
+    border-radius: 20px;
+    /* Bo tròn góc */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Hiệu ứng đổ bóng */
+    background: url('../../assets/koicard.jpg') no-repeat center center;
+    /* Đặt hình nền cho card */
+    background-size: cover;
+    /* Hình nền bao phủ toàn bộ card */
+    display: flex;
+    justify-content: center;
+    /* Căn giữa nội dung theo chiều ngang */
+    align-items: center;
+    /* Căn giữa nội dung theo chiều dọc */
+    position: relative;
+    /* Để căn nội dung chữ */
+    text-align: center;
+    overflow: hidden;
+    /* Đảm bảo không có phần tử nào bị tràn */
+}
+
+.card-content {
+    color: white;
+    /* Màu chữ */
+    font-size: 30px;
+    /* Kích thước chữ */
+    font-weight: bold;
+    /* Độ đậm của chữ */
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    /* Nền mờ phía sau chữ để nổi bật trên nền hình */
+    padding: 10px;
+    /* Khoảng cách bên trong của chữ */
+    border-radius: 10px;
+    /* Bo tròn phần nền mờ */
+    z-index: 1;
+    /* Đảm bảo chữ hiển thị phía trên hình nền */
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.title-text {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 15px;
+    /* Khoảng cách giữa đường kẻ và chữ */
+}
+
+.line {
+    flex-grow: 0.5;
+    /* Đường kẻ sẽ tự động giãn ra theo không gian trống */
+    border-top: 1px solid black;
+    /* Đặt độ dày và màu cho đường kẻ */
+    margin: 0 10px;
+    /* Khoảng cách giữa đường kẻ và hai đầu container */
+}
+
+.card-product {
+    display: flex;
+    justify-content: space-around;
+    /* Căn đều các card */
+    padding: 10px 0;
+}
+
+.card-product-child {
+    width: 180px;
+    /* Đặt chiều rộng cho mỗi card */
+    height: 220px;
+    /* Chiều cao lớn hơn để chứa cả hình và văn bản */
+    border-radius: 20px;
+    /* Bo tròn toàn bộ card */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Hiệu ứng đổ bóng */
+    display: flex;
+    flex-direction: column;
+    /* Đặt theo chiều dọc */
+    align-items: center;
+    justify-content: space-between;
+    /* Cân giữa hình và văn bản */
+    text-align: center;
+    background-color: #f0f0f0;
+    /* Màu nền cho card */
+    overflow: hidden;
+    /* Đảm bảo phần tử con bị bo tròn theo card */
+}
+
+.card-content-child {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Màu nền tối phía sau text */
+    border-radius: 0 0 20px 20px;
+    /* Bo góc phần dưới của card */
+    width: 100%;
+    text-align: center;
+}
+
+.imgProduct {
+    height: 100%;
+    width: 100%;
+}

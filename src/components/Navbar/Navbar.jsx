@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link từ react-router-dom
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
+
 const Navbar = () => {
   const [menu, setMenu] = useState("Trang chủ");
 
@@ -12,26 +14,37 @@ const Navbar = () => {
           onClick={() => setMenu("Trang chủ")}
           className={menu === "Trang chủ" ? "active" : ""}
         >
-          Trang chủ
+          <Link to="/" className="navbar-link">
+            Trang chủ
+          </Link>{" "}
+          {/* Sử dụng Link */}
         </li>
         <li
           onClick={() => setMenu("Bài viết chia sẻ")}
           className={menu === "Bài viết chia sẻ" ? "active" : ""}
-          
         >
-          Bài viết chia sẻ
+          <Link to="/blog" className="navbar-link">
+            Bài viết chia sẻ
+          </Link>{" "}
+          {/* Sử dụng Link */}
         </li>
         <li
           onClick={() => setMenu("Quản lý cá Koi")}
           className={menu === "Quản lý cá Koi" ? "active" : ""}
         >
-          Quản lý cá Koi
+          <Link to="/manageKoi" className="navbar-link">
+            Quản lý cá Koi
+          </Link>{" "}
+          {/* Sử dụng Link */}
         </li>
         <li
           onClick={() => setMenu("Cửa hàng")}
           className={menu === "Cửa hàng" ? "active" : ""}
         >
-          Cửa hàng
+          <Link to="/store" className="navbar-link">
+            Cửa hàng
+          </Link>{" "}
+          {/* Sử dụng Link */}
         </li>
       </ul>
       <div className="navbar-right">
