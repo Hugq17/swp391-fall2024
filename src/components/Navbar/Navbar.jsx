@@ -48,12 +48,15 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="" />
+        {/* <img src={assets.search_icon} alt="" /> */}
         <div className="navbar-search-icon">
           <img src={assets.basket_icon} alt="" />
           <div className="dot"></div>
         </div>
-        <button>Đăng nhập</button>
+        <Link to="/login" className="navbar-link">
+          <button>Đăng nhập</button>
+        </Link>{" "}
+        {/* Sử dụng Link */}
       </div>
     </div>
   );

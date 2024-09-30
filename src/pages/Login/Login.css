@@ -1,0 +1,108 @@
+/* Tạo background chủ đề cá Koi */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #f0f9ff, #cce7e8);
+    /* Màu nước nhẹ nhàng */
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('https://example.com/koi-background.jpg');
+    /* Ảnh nền của hồ cá Koi */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Container chính cho form đăng nhập */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Hộp đăng nhập */
+.login-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    text-align: center;
+}
+
+/* Tiêu đề đăng nhập */
+.login-title {
+    font-size: 24px;
+    color: #e74c3c;
+    /* Màu đỏ cam gợi nhớ tới cá Koi */
+    margin-bottom: 20px;
+    font-family: 'Pacifico', cursive;
+    /* Font chữ mềm mại */
+}
+
+/* Nhóm input */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Nhãn cho các input */
+.input-group label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Input style */
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Button đăng nhập */
+.login-button {
+    background-color: #e74c3c;
+    /* Màu đỏ cam */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.login-button:hover {
+    background-color: #c0392b;
+}
+
+/* Hiệu ứng chuyển động cho cá Koi */
+.login-container::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-image: url('https://example.com/koi-fish.png');
+    /* Ảnh cá Koi nhỏ */
+    background-size: cover;
+    animation: swim 10s linear infinite;
+}
+
+/* Tạo hiệu ứng cá bơi */
+@keyframes swim {
+    0% {
+        transform: translateX(-100px) translateY(50px);
+    }
+
+    100% {
+        transform: translateX(100vw) translateY(-50px);
+    }
+}

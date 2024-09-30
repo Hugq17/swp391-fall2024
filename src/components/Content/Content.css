@@ -102,11 +102,11 @@
 }
 
 .card-content-child {
-    color: white;
+    color: black;
     font-size: 16px;
     font-weight: bold;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: white;
     /* Màu nền tối phía sau text */
     border-radius: 0 0 20px 20px;
     /* Bo góc phần dưới của card */

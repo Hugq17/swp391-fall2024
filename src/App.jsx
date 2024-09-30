@@ -7,6 +7,7 @@ import Cart from "./pages/Cart/Cart";
 import Blog from "./pages/Blog/Blog";
 import ManageKoi from "./pages/ManageKoi/ManageKoi";
 import Store from "./pages/Store/Store";
+import Login from "./pages/Login/Login";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/manageKoi" element={<ManageKoi />} />
         <Route path="/store" element={<Store />} />
         <Route path="/order" element={<PlaceOrder />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );

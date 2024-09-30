@@ -1,17 +1,5 @@
 import React from "react";
 import "./Content.css";
-import ImageCard from "../ImageCard/ImageCard";
-import { assets } from "./../../assets/assets";
-
-const imageData = [
-  {
-    src: "src/assets/koitank.jpg",
-    title: "Hồ cá",
-  },
-  { src: "src/assets/koitank.jpg", title: "Đồ lọc bể" },
-  { src: "src/assets/koitank.jpg", title: "Đá lọc" },
-  { src: "src/assets/koitank.jpg", title: "Cây cảnh & đồ trang trí" },
-];
 
 const Content = () => {
   return (

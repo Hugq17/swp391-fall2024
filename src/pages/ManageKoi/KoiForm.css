@@ -1,0 +1,95 @@
+.koi-form-container {
+    max-width: 1000px;
+    /* Độ rộng tối đa cho container */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #e74c3c;
+}
+
+.koi-form-wrapper {
+    display: flex;
+    justify-content: space-between;
+    /* Chia đều khoảng cách giữa các phần */
+    align-items: flex-start;
+}
+
+/* Phần form nhập liệu */
+.koi-form {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    /* Đặt kích thước cho phần nhập liệu */
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.calculate-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.calculate-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.calculate-button:hover:enabled {
+    background-color: #c0392b;
+}
+
+/* Phần hiển thị thông tin */
+.koi-care-info {
+    width: 45%;
+    /* Đặt kích thước cho phần hiển thị thông tin */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.koi-care-info h3 {
+    color: #3498db;
+    margin-bottom: 15px;
+}
+
+.koi-care-info p {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.loading-message {
+    font-size: 16px;
+    color: #3498db;
+    text-align: center;
+}
