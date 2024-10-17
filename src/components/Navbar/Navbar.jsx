@@ -1,10 +1,33 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link từ react-router-dom
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Thêm useNavigate để điều hướng
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
 
 const Navbar = () => {
   const [menu, setMenu] = useState("Trang chủ");
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Trạng thái đăng nhập
+  const [userName, setUserName] = useState(""); // Lưu tên người dùng
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Giả sử trạng thái đăng nhập và tên người dùng được lưu trong localStorage
+    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const storedUserName = localStorage.getItem("userName");
+
+    setIsLoggedIn(loggedIn);
+    if (storedUserName) {
+      setUserName(storedUserName); // Cập nhật tên người dùng
+    }
+  }, []);
+
+  const handleKoiManagementClick = () => {
+    if (isLoggedIn) {
+      setMenu("Quản lý cá Koi");
+    } else {
+      // Chuyển hướng tới trang đăng nhập nếu chưa đăng nhập
+      navigate("/login");
+    }
+  };
 
   return (
     <div className="navbar">
@@ -16,8 +39,7 @@ const Navbar = () => {
         >
           <Link to="/" className="navbar-link">
             Trang chủ
-          </Link>{" "}
-          {/* Sử dụng Link */}
+          </Link>
         </li>
         <li
           onClick={() => setMenu("Bài viết chia sẻ")}
@@ -25,17 +47,15 @@ const Navbar = () => {
         >
           <Link to="/blog" className="navbar-link">
             Bài viết chia sẻ
-          </Link>{" "}
-          {/* Sử dụng Link */}
+          </Link>
         </li>
         <li
-          onClick={() => setMenu("Quản lý cá Koi")}
+          onClick={handleKoiManagementClick} // Kiểm tra đăng nhập khi nhấn vào Quản lý cá Koi
           className={menu === "Quản lý cá Koi" ? "active" : ""}
         >
-          <Link to="/manageKoi" className="navbar-link">
+          <Link to={isLoggedIn ? "/manageKoi" : "#"} className="navbar-link">
             Quản lý cá Koi
-          </Link>{" "}
-          {/* Sử dụng Link */}
+          </Link>
         </li>
         <li
           onClick={() => setMenu("Cửa hàng")}
@@ -43,20 +63,20 @@ const Navbar = () => {
         >
           <Link to="/store" className="navbar-link">
             Cửa hàng
-          </Link>{" "}
-          {/* Sử dụng Link */}
+          </Link>
         </li>
       </ul>
       <div className="navbar-right">
-        {/* <img src={assets.search_icon} alt="" /> */}
         <div className="navbar-search-icon">
           <img src={assets.basket_icon} alt="" />
-          <div className="dot"></div>
         </div>
-        <Link to="/login" className="navbar-link">
-          <button>Đăng nhập</button>
-        </Link>{" "}
-        {/* Sử dụng Link */}
+        {isLoggedIn ? (
+          <span className="welcome-message">Xin chào, {userName}</span> // Hiển thị tên người dùng sau khi đăng nhập
+        ) : (
+          <Link to="/login" className="navbar-link">
+            <button>Đăng nhập</button>
+          </Link>
+        )}
       </div>
     </div>
   );
