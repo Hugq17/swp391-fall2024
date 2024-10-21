@@ -1,79 +1,109 @@
 .navbar {
-    padding: 20px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 20px;
+    background-color: #004d00;
+    /* Màu nền navbar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.navbar .logo {
-    width: 150px;
-
+.logo {
+    height: 50px;
+    /* Kích thước logo */
 }
 
 .navbar-menu {
-    display: flex;
     list-style: none;
-    gap: 20px;
-    color: #49557E;
-    font-size: 18px;
+    display: flex;
+    gap: 15px;
+    /* Khoảng cách giữa các item */
+}
+
+.navbar-link {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    /* Bo góc */
+    transition: background-color 0.3s;
+}
+
+.navbar-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Hiệu ứng hover */
+}
+
+.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    /* Nền cho item đang hoạt động */
 }
 
 .navbar-right {
     display: flex;
     align-items: center;
-    gap: 40px;
-}
-
-.navbar button {
-    background: transparent;
-    font-size: 16px;
-    color: #49557e;
-    border: 1px solid tomato;
-    padding: 10px 30px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3;
-}
-
-.navbar button:hover {
-    background-color: #fff4f2;
-}
-
-.navbar .active {
-    padding-bottom: 2px;
-    border-bottom: 2px solid #49557E;
-}
-
-.navbar li {
-    cursor: pointer;
 }
 
 .navbar-search-icon {
+    margin-right: 20px;
+    /* Khoảng cách giữa giỏ hàng và tên người dùng */
+}
+
+.user-dropdown {
     position: relative;
+    /* Để dropdown menu có thể được định vị */
 }
 
-.navbar-search-icon .dot {
+.welcome-message {
+    color: white;
+    cursor: pointer;
+    /* Con trỏ sẽ là tay khi hover */
+}
+
+.dropdown-menu {
     position: absolute;
-    min-width: 10px;
-    min-height: 10px;
-    background-color: tomato;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    /* Nền của dropdown */
     border-radius: 5px;
-    top: -8px;
-    right: -8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    /* Đảm bảo dropdown nằm trên các phần tử khác */
 }
 
-.navbar-link {
-    text-decoration: none;
-    /* Bỏ gạch chân */
-    color: inherit;
-    /* Kế thừa màu chữ từ cha */
-    display: block;
-    /* Đảm bảo chiếm toàn bộ chiều rộng của mục */
+.dropdown-menu button {
+    background: none;
+    border: none;
+    color: #004d00;
+    /* Màu văn bản */
+    padding: 10px 20px;
+    width: 100%;
+    text-align: left;
+    /* Căn trái cho văn bản */
+    cursor: pointer;
+    /* Con trỏ tay cho button */
+}
+
+.dropdown-menu button:hover {
+    background-color: rgba(0, 77, 0, 0.1);
+    /* Hiệu ứng hover cho button trong dropdown */
+}
+
+.login-button {
+    background-color: #007bff;
+    /* Màu nền cho button đăng nhập */
+    color: white;
+    /* Màu chữ */
+    border: none;
+    border-radius: 5px;
+    /* Bo góc */
     padding: 10px 15px;
-    /* Khoảng cách cho các mục menu */
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.navbar-link:hover {
-    color: #007bff;
-    /* Thay đổi màu khi di chuột (tùy chọn) */
+.login-button:hover {
+    background-color: #0056b3;
+    /* Hiệu ứng hover cho button đăng nhập */
 }
