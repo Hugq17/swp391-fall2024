@@ -24,7 +24,6 @@
     color: white;
     text-decoration: none;
     padding: 10px;
-    border-radius: 5px;
     /* Bo góc */
     transition: background-color 0.3s;
 }
@@ -32,11 +31,15 @@
 .navbar-link:hover {
     background-color: rgba(255, 255, 255, 0.2);
     /* Hiệu ứng hover */
+    border-radius: 12px;
+    padding: 10px;
 }
 
 .active {
     background-color: rgba(255, 255, 255, 0.3);
     /* Nền cho item đang hoạt động */
+    border-radius: 12px;
+    padding: 10px;
 }
 
 .navbar-right {

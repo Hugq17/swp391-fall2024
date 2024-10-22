@@ -82,3 +82,8 @@ input {
 .save-button:hover {
     background-color: #218838;
 }
+
+.button-add-fish {
+    background-color: blue;
+    color: white;
+}
