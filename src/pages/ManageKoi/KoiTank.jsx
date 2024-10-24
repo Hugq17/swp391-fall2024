@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./PondCard.css"; // Import file CSS cho card và modal
+import "./KoiTank.css"; // Import file CSS cho bảng và modal
 
 const PondCard = () => {
   const [ponds, setPonds] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false); // Trạng thái để hiển thị modal
+  const [selectedPondId, setSelectedPondId] = useState(null); // Trạng thái lưu hồ cá được chọn để thêm cá
+  const [koiTypes, setKoiTypes] = useState([]); // Lưu danh sách giống cá
   const [newFish, setNewFish] = useState({
     name: "",
-    imageUrl: "",
-    size: "",
+    koiTypeId: "",
+    age: "",
+    length: "",
     weight: "",
-    gender: "",
-    species: "",
+    gender: "1", // Mặc định là Giới tính đực
     origin: "",
+    shape: "",
+    breed: "",
+    imageUrl: "",
   });
 
+  // Lấy danh sách hồ cá
   useEffect(() => {
     const fetchPonds = async () => {
       const token = localStorage.getItem("token");
@@ -44,6 +50,34 @@ const PondCard = () => {
     fetchPonds();
   }, []);
 
+  // Lấy danh sách giống cá từ API
+  useEffect(() => {
+    const fetchKoiTypes = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("No token found! Please login first.");
+        return;
+      }
+
+      try {
+        const response = await axios.get(
+          "https://koi-care-server.azurewebsites.net/api/koifish/get-all-koi-types",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setKoiTypes(response.data.koiTypes); // Lưu danh sách giống cá vào state
+      } catch (error) {
+        console.error("There was an error fetching the koi types!", error);
+      }
+    };
+
+    fetchKoiTypes();
+  }, []);
+
+  // Xử lý thay đổi input của form thêm cá
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewFish({
@@ -52,10 +86,50 @@ const PondCard = () => {
     });
   };
 
-  const handleAddFish = (pondId) => {
-    // Xử lý khi người dùng nhấn "Lưu Cá"
-    console.log("New Fish Added to pond:", pondId, newFish);
-    setShowModal(false); // Đóng modal sau khi thêm cá
+  // Hàm gọi API thêm cá vào hồ
+  const handleAddFish = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("No token found! Please login first.");
+      return;
+    }
+
+    const fishData = {
+      ...newFish,
+      pondId: selectedPondId, // Thêm pondId vào dữ liệu gửi đi
+    };
+
+    try {
+      const response = await axios.post(
+        "https://koi-care-server.azurewebsites.net/api/koifish/create",
+        fishData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status === 200) {
+        alert("Cá đã được thêm thành công!");
+        setShowModal(false); // Đóng modal sau khi thêm cá
+        setNewFish({
+          // Reset form
+          name: "",
+          koiTypeId: "",
+          age: "",
+          length: "",
+          weight: "",
+          gender: "1",
+          origin: "",
+          shape: "",
+          breed: "",
+          imageUrl: "",
+        });
+      }
+    } catch (error) {
+      console.error("There was an error adding the fish!", error);
+      alert("Có lỗi xảy ra khi thêm cá.");
+    }
   };
 
   if (loading) {
@@ -66,17 +140,25 @@ const PondCard = () => {
     <div className="pond-card-container">
       {ponds.map((pond) => (
         <div className="pond-card" key={pond.id}>
-          <img src={pond.imageUrl} alt={pond.name} className="pond-image" />
           <h2 className="pond-name">{pond.name}</h2>
           <p>Chiều dài: {pond.length} m</p>
           <p>Chiều rộng: {pond.width} m</p>
           <p>Độ sâu: {pond.depth} m</p>
           <p>Thể tích: {pond.volume} L</p>
-          <p>Số lượng cống thoát: {pond.drainageCount}</p>
-          <p>Công suất máy bơm: {pond.pumpCapacity} L/h</p>
 
-          {/* Button để hiển thị modal thêm cá */}
-          <button className="button-add-fish" onClick={() => setShowModal(true)}>+ Thêm Cá</button>
+          {/* Bảng hiển thị cá trong hồ */}
+          <KoiFishTable pondId={pond.id} />
+
+          {/* Nút để mở modal thêm cá */}
+          <button
+            className="button-add-fish"
+            onClick={() => {
+              setSelectedPondId(pond.id); // Lưu id hồ cá hiện tại để thêm cá
+              setShowModal(true); // Mở modal thêm cá
+            }}
+          >
+            + Thêm Cá
+          </button>
         </div>
       ))}
 
@@ -84,7 +166,7 @@ const PondCard = () => {
       {showModal && (
         <div className="modal">
           <div className="modal-content">
-            <h3>Thêm Cá Mới</h3>
+            <h3>Thêm Cá Mới vào hồ {selectedPondId}</h3>
             <label>Tên cá:</label>
             <input
               type="text"
@@ -93,19 +175,35 @@ const PondCard = () => {
               onChange={handleInputChange}
               required
             />
-            <label>Hình ảnh URL:</label>
+
+            <label>Giống cá Koi:</label>
+            <select
+              name="koiTypeId"
+              value={newFish.koiTypeId}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="">Chọn giống cá</option>
+              {koiTypes.map((type) => (
+                <option key={type.id} value={type.id}>
+                  {type.name}
+                </option>
+              ))}
+            </select>
+
+            <label>Tuổi:</label>
             <input
-              type="text"
-              name="imageUrl"
-              value={newFish.imageUrl}
+              type="number"
+              name="age"
+              value={newFish.age}
               onChange={handleInputChange}
               required
             />
-            <label>Kích thước (cm):</label>
+            <label>Chiều dài (m):</label>
             <input
               type="number"
-              name="size"
-              value={newFish.size}
+              name="length"
+              value={newFish.length}
               onChange={handleInputChange}
               required
             />
@@ -123,17 +221,10 @@ const PondCard = () => {
               value={newFish.gender}
               onChange={handleInputChange}
             >
-              <option value="male">Đực</option>
-              <option value="female">Cái</option>
+              <option value="1">Đực</option>
+              <option value="2">Cái</option>
             </select>
-            <label>Giống:</label>
-            <input
-              type="text"
-              name="species"
-              value={newFish.species}
-              onChange={handleInputChange}
-              required
-            />
+
             <label>Xuất xứ:</label>
             <input
               type="text"
@@ -142,14 +233,116 @@ const PondCard = () => {
               onChange={handleInputChange}
               required
             />
+            <label>Hình dáng:</label>
+            <input
+              type="text"
+              name="shape"
+              value={newFish.shape}
+              onChange={handleInputChange}
+              required
+            />
+            <label>Dòng giống:</label>
+            <input
+              type="text"
+              name="breed"
+              value={newFish.breed}
+              onChange={handleInputChange}
+              required
+            />
+            <label>Hình ảnh URL:</label>
+            <input
+              type="text"
+              name="imageUrl"
+              value={newFish.imageUrl}
+              onChange={handleInputChange}
+              required
+            />
+
             <div className="modal-buttons">
-              <button onClick={() => handleAddFish()}>Thêm Cá</button>
+              <button onClick={handleAddFish}>Thêm Cá</button>
               <button onClick={() => setShowModal(false)}>Hủy</button>
             </div>
           </div>
         </div>
       )}
     </div>
+  );
+};
+
+// Component hiển thị bảng cá Koi trong từng hồ (KoiFishTable)
+const KoiFishTable = ({ pondId }) => {
+  const [koiFish, setKoiFish] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchKoiFish = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("No token found! Please login first.");
+        return;
+      }
+
+      try {
+        const response = await axios.get(
+          `https://koi-care-server.azurewebsites.net/api/koifish/${pondId}`, // API lấy danh sách cá của từng hồ
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setKoiFish(response.data.koiResults);
+      } catch (error) {
+        console.error("There was an error fetching the koi fish!", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchKoiFish();
+  }, [pondId]);
+
+  if (loading) {
+    return <div>Loading koi fish...</div>;
+  }
+
+  return (
+    <table className="koi-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tên</th>
+          <th>Giống</th>
+          <th>Hình ảnh</th>
+          <th>Tuổi</th>
+          <th>Chiều dài (m)</th>
+          <th>Trọng lượng (g)</th>
+          <th>Giới tính</th>
+          <th>Xuất xứ</th>
+          <th>Hình dáng</th>
+          <th>Dòng giống</th>
+        </tr>
+      </thead>
+      <tbody>
+        {koiFish.map((fish) => (
+          <tr key={fish.id}>
+            <td>{fish.id}</td>
+            <td>{fish.name}</td>
+            <td>{fish.koiType}</td>
+            <td>
+              <img src={fish.imageUrl} alt={fish.name} className="koi-image" />
+            </td>
+            <td>{fish.age}</td>
+            <td>{fish.length}</td>
+            <td>{fish.weight}</td>
+            <td>{fish.gender === 1 ? "Đực" : "Cái"}</td>
+            <td>{fish.origin}</td>
+            <td>{fish.shape}</td>
+            <td>{fish.breed}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 
