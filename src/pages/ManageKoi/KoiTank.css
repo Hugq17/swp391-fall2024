@@ -110,3 +110,76 @@
   max-width: 90%;
   text-align: center;
 }
+
+.pond-card {
+  background-color: #fff;
+  /* Nền trắng */
+  border-radius: 8px;
+  /* Bo tròn góc */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Đổ bóng nhẹ */
+  margin: 15px;
+  /* Khoảng cách giữa các thẻ hồ */
+  padding: 20px;
+  /* Khoảng cách bên trong thẻ hồ */
+  transition: transform 0.3s;
+  /* Hiệu ứng khi hover */
+}
+
+.pond-card:hover {
+  transform: translateY(-5px);
+  /* Di chuyển nhẹ lên khi hover */
+}
+
+.pond-name {
+  font-size: 24px;
+  /* Kích thước chữ cho tên hồ */
+  color: #4CAF50;
+  /* Màu xanh lá cho tiêu đề */
+  margin-bottom: 10px;
+  /* Khoảng cách dưới tiêu đề */
+  text-align: center;
+  /* Căn giữa tiêu đề */
+}
+
+.pond-details {
+  margin-bottom: 15px;
+  /* Khoảng cách dưới chi tiết hồ */
+  font-size: 16px;
+  /* Kích thước chữ cho các thông tin khác */
+}
+
+.pond-dimension {
+  margin: 5px 0;
+  /* Khoảng cách giữa các dòng */
+}
+
+/* Thiết kế cho nút thêm cá */
+.button-add-fish {
+  background-color: #4CAF50;
+  /* Màu nền xanh lá cây */
+  color: white;
+  /* Màu chữ trắng */
+  border: none;
+  /* Không viền */
+  border-radius: 5px;
+  /* Bo tròn góc */
+  padding: 10px 15px;
+  /* Khoảng cách bên trong nút */
+  cursor: pointer;
+  /* Con trỏ chuột khi hover */
+  font-size: 16px;
+  /* Kích thước chữ cho nút */
+  transition: background-color 0.3s;
+  /* Hiệu ứng chuyển màu */
+  display: block;
+  /* Căn giữa nút */
+  margin: 0 auto;
+  /* Căn giữa nút */
+  margin-top: 20px;
+}
+
+.button-add-fish:hover {
+  background-color: #45a049;
+  /* Tối màu khi hover */
+}

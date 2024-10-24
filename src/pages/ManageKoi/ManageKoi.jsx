@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./KoiForm.css"; // Import file CSS
 import PondCard from "./KoiTank";
+import PondParameters from "./Pondparameters"; // Import PondParameters component
+import KoiInfo from "./KoiInfo";
 
 const PondForm = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +18,7 @@ const PondForm = () => {
   });
 
   const [isOpen, setIsOpen] = useState(false); // State để quản lý hiển thị form
+  const [showParameters, setShowParameters] = useState(false); // State để hiển thị PondParameters
 
   const handleChange = (e) => {
     setFormData({
@@ -73,115 +76,129 @@ const PondForm = () => {
     }
   };
 
+  const toggleParameters = () => {
+    setShowParameters((prev) => !prev); // Toggle trạng thái hiển thị PondParameters
+    setIsOpen(false); // Đảm bảo form cũng đóng lại khi hiển thị thông số hồ
+  };
+
   return (
     <div>
       <button className="add-pond-button" onClick={() => setIsOpen(true)}>
         Thêm Hồ Cá
       </button>
-      {isOpen && (
-        <div className="form-overlay">
-          <div className="form-container">
-            <button className="close-button" onClick={() => setIsOpen(false)}>
-              X
-            </button>
-            <h1>Thêm Hồ Cá</h1>
-            <form onSubmit={handleSubmit}>
-              <label>
-                Tên:
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <br />
-              <label>
-                URL Ảnh:
-                <input
-                  type="text"
-                  name="imageUrl"
-                  value={formData.imageUrl}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <br />
-              <label>
-                Chiều dài:
-                <input
-                  type="number"
-                  name="length"
-                  value={formData.length}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <br />
-              <label>
-                Chiều rộng:
-                <input
-                  type="number"
-                  name="width"
-                  value={formData.width}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <br />
-              <label>
-                Độ sâu:
-                <input
-                  type="number"
-                  name="depth"
-                  value={formData.depth}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <br />
-              <label>
-                Thể tích:
-                <input
-                  type="number"
-                  name="volume"
-                  value={formData.volume}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <br />
-              <label>
-                Số lượng cống thoát:
-                <input
-                  type="number"
-                  name="drainageCount"
-                  value={formData.drainageCount}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <br />
-              <label>
-                Công suất máy bơm:
-                <input
-                  type="number"
-                  name="pumpCapacity"
-                  value={formData.pumpCapacity}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <br />
-              <button className="save-button" type="submit">
-                Lưu Hồ Cá
+      <button className="parameters-button" onClick={toggleParameters}>
+        Thông số hồ
+      </button>
+
+      {showParameters ? (
+        <PondParameters /> // Hiển thị nội dung từ PondParameters
+      ) : (
+        isOpen && (
+          <div className="form-overlay">
+            <div className="form-container">
+              <button className="close-button" onClick={() => setIsOpen(false)}>
+                X
               </button>
-            </form>
+              <h1>Thêm Hồ Cá</h1>
+              <form onSubmit={handleSubmit}>
+                <label>
+                  Tên:
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <br />
+                <label>
+                  URL Ảnh:
+                  <input
+                    type="text"
+                    name="imageUrl"
+                    value={formData.imageUrl}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <br />
+                <label>
+                  Chiều dài:
+                  <input
+                    type="number"
+                    name="length"
+                    value={formData.length}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <br />
+                <label>
+                  Chiều rộng:
+                  <input
+                    type="number"
+                    name="width"
+                    value={formData.width}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <br />
+                <label>
+                  Độ sâu:
+                  <input
+                    type="number"
+                    name="depth"
+                    value={formData.depth}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <br />
+                <label>
+                  Thể tích:
+                  <input
+                    type="number"
+                    name="volume"
+                    value={formData.volume}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <br />
+                <label>
+                  Số lượng cống thoát:
+                  <input
+                    type="number"
+                    name="drainageCount"
+                    value={formData.drainageCount}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <br />
+                <label>
+                  Công suất máy bơm:
+                  <input
+                    type="number"
+                    name="pumpCapacity"
+                    value={formData.pumpCapacity}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <br />
+                <button className="save-button" type="submit">
+                  Lưu Hồ Cá
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
+        )
       )}
       <PondCard />
+      <KoiInfo />
     </div>
   );
 };

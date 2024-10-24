@@ -141,10 +141,20 @@ const PondCard = () => {
       {ponds.map((pond) => (
         <div className="pond-card" key={pond.id}>
           <h2 className="pond-name">{pond.name}</h2>
-          <p>Chiều dài: {pond.length} m</p>
-          <p>Chiều rộng: {pond.width} m</p>
-          <p>Độ sâu: {pond.depth} m</p>
-          <p>Thể tích: {pond.volume} L</p>
+          <div className="pond-details">
+            <p className="pond-dimension">
+              <strong>Chiều dài:</strong> {pond.length} m
+            </p>
+            <p className="pond-dimension">
+              <strong>Chiều rộng:</strong> {pond.width} m
+            </p>
+            <p className="pond-dimension">
+              <strong>Độ sâu:</strong> {pond.depth} m
+            </p>
+            <p className="pond-dimension">
+              <strong>Thể tích:</strong> {pond.volume} L
+            </p>
+          </div>
 
           {/* Bảng hiển thị cá trong hồ */}
           <KoiFishTable pondId={pond.id} />
@@ -284,7 +294,7 @@ const KoiFishTable = ({ pondId }) => {
 
       try {
         const response = await axios.get(
-          `https://koi-care-server.azurewebsites.net/api/koifish/${pondId}`, // API lấy danh sách cá của từng hồ
+          `https://koi-care-server.azurewebsites.net/api/koifish/get-all-fish/${pondId}`, // API lấy danh sách cá của từng hồ
           {
             headers: {
               Authorization: `Bearer ${token}`,
