@@ -8,6 +8,7 @@ import Blog from "./pages/Blog/Blog";
 import ManageKoi from "./pages/ManageKoi/ManageKoi";
 import Store from "./pages/Store/Store";
 import Login from "./pages/Login/Login";
+import BlogDetail from "./pages/Blog/BlogDetail";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogDetail />} />
         <Route path="/manageKoi" element={<ManageKoi />} />
         <Route path="/store" element={<Store />} />
         <Route path="/order" element={<PlaceOrder />} />

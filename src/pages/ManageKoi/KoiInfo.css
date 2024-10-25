@@ -1,0 +1,5 @@
+.chart-item {
+  width: 100%;
+  height: 500px; /* Increase height for better visibility */
+  margin-bottom: 20px;
+}
