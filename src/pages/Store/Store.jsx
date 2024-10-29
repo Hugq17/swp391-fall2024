@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ProductStore.css";
 
-function ProductStore() {
+function ProductStore({ onCartUpdate }) {
+  // Nhận props từ Navbar
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -48,6 +49,23 @@ function ProductStore() {
     ? products.filter((product) => product.category === selectedCategory)
     : products;
 
+  // Hàm thêm sản phẩm vào giỏ hàng
+  const addToCart = (product) => {
+    const storedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const existingProduct = storedCart.find((item) => item.id === product.id);
+
+    if (existingProduct) {
+      existingProduct.quantity += 1; // Tăng số lượng nếu sản phẩm đã có trong giỏ
+    } else {
+      storedCart.push({ ...product, quantity: 1 }); // Thêm sản phẩm mới vào giỏ hàng
+    }
+
+    localStorage.setItem("cartItems", JSON.stringify(storedCart));
+
+    // Cập nhật giỏ hàng ở Navbar
+    onCartUpdate(storedCart);
+  };
+
   return (
     <div className="store-container">
       <aside className="category-sidebar">
@@ -92,6 +110,9 @@ function ProductStore() {
                   <p className="product-price">
                     Giá: {product.price.toLocaleString("vi-VN")} VND
                   </p>
+                  <button onClick={() => addToCart(product)}>
+                    Thêm vào giỏ
+                  </button>
                 </div>
               </div>
             ))

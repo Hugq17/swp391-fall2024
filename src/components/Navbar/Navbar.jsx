@@ -8,22 +8,26 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     const storedUserName = localStorage.getItem("userName");
     if (token) {
-      setIsLoggedIn(true); // Đánh dấu là đã đăng nhập
-      setUserName(storedUserName); // Lấy tên người dùng từ localStorage
+      setIsLoggedIn(true);
+      setUserName(storedUserName);
     }
+
+    const storedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(storedCart);
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userName");
     setIsLoggedIn(false);
-    setUserName(""); // Đặt lại tên người dùng
+    setUserName("");
     navigate("/login");
   };
 
@@ -39,6 +43,11 @@ const Navbar = () => {
       navigate("/manageKoi");
       setMenu("Quản lý cá Koi");
     }
+  };
+
+  // Tính tổng số lượng sản phẩm trong giỏ hàng
+  const getTotalItemsInCart = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
 
   return (
@@ -62,7 +71,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li
-          onClick={handleKoiManagementClick} // Chuyển hướng tới quản lý cá Koi
+          onClick={handleKoiManagementClick}
           className={menu === "Quản lý cá Koi" ? "active" : ""}
         >
           <Link to="#" className="navbar-link">
@@ -79,13 +88,16 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="navbar-right">
-        <div className="navbar-search-icon">
-          <img src={assets.basket_icon} alt="Giỏ hàng" />
+        <div className="navbar-cart-icon" onClick={() => navigate("/cart")}>
+          <img className="img-logo" src={assets.cart} alt="Giỏ hàng" />
+          {getTotalItemsInCart() > 0 && (
+            <span className="cart-count">{getTotalItemsInCart()}</span>
+          )}
         </div>
         {isLoggedIn ? (
           <div className="user-dropdown">
             <span className="welcome-message" onClick={toggleDropdown}>
-              Xin chào, {userName} {/* Hiển thị tên người dùng */}
+              Xin chào, {userName}
             </span>
             {isDropdownOpen && (
               <div className="dropdown-menu">

@@ -110,3 +110,42 @@
     background-color: #0056b3;
     /* Hiệu ứng hover cho button đăng nhập */
 }
+
+.navbar-cart-icon {
+    display: flex;
+    /* Sử dụng flexbox để căn chỉnh các phần tử */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    cursor: pointer;
+    /* Con trỏ sẽ thành hình bàn tay khi hover */
+}
+
+.img-logo {
+    width: 100px;
+    /* Chiều rộng của hình ảnh giỏ hàng */
+    height: 100px;
+    /* Chiều cao của hình ảnh giỏ hàng */
+    margin-right: 8px;
+    /* Khoảng cách giữa hình ảnh và số lượng */
+}
+
+.cart-count {
+    background-color: #ff4757;
+    /* Màu nền cho số lượng */
+    color: white;
+    /* Màu chữ */
+    border-radius: 50%;
+    /* Hình tròn */
+    padding: 5px 8px;
+    /* Padding để tạo khoảng cách */
+    font-weight: bold;
+    /* Độ đậm của chữ */
+    font-size: 14px;
+    /* Kích thước chữ */
+    display: flex;
+    /* Sử dụng flexbox để căn giữa số lượng */
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+}
