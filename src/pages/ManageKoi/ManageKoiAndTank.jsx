@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./KoiForm.css"; // Import file CSS
-import PondCard from "./KoiTank";
+import PondCard from "./ManageFish";
 import PondParameters from "./Pondparameters"; // Import PondParameters component
-import KoiInfo from "./KoiInfo";
+import KoiInfo from "./Bieudothongsonuoc";
 
 const PondForm = () => {
   const [formData, setFormData] = useState({
@@ -23,12 +23,11 @@ const PondForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Kiểm tra xem trường nào đang được thay đổi
+    // Kiểm tra trường koiGroupId và đặt giá trị null nếu chọn "Không"
     if (name === "koiGroupId") {
-      // Nếu chọn "Không", set koiGroupId thành null
       setFormData({
         ...formData,
-        [name]: value === "0" ? null : value, // Đặt giá trị thành null nếu chọn "Không"
+        [name]: value === "0" ? null : parseInt(value), // Đặt thành null nếu chọn "Không", chuyển thành số nếu chọn nhóm
       });
     } else {
       setFormData({
@@ -205,15 +204,22 @@ const PondForm = () => {
                 <br />
                 {/* Dropdown để chọn koiGroupId */}
                 <label>
-                  Có nhóm Koi:
+                  Nhóm Koi:
                   <select
                     name="koiGroupId"
                     value={formData.koiGroupId || 0} // Đặt giá trị mặc định cho select
                     onChange={handleChange}
                     required
                   >
-                    <option value="1">Có</option>
                     <option value="0">Không</option>
+                    <option value="1">
+                      Nhóm 1 - Taisho Sanke (Sanke) - Kohaku - Showa Sanshoku
+                      (Showa) - Utsurimono (Utsuri) - Bekko
+                    </option>
+                    <option value="2">Nhóm 2 - Shusui - Asagi</option>
+                    <option value="3">Nhóm 3 - Ogons - Tancho</option>
+                    <option value="4">Nhóm 4 - Kawarimono - Doitsu Koi</option>
+                    <option value="5">Nhóm 5 - Goshiki</option>
                   </select>
                 </label>
                 <br />

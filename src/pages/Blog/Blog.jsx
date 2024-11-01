@@ -11,18 +11,10 @@ const BlogList = () => {
   // Fetch all blogs data from the API
   useEffect(() => {
     const fetchBlogs = async () => {
-      const token = localStorage.getItem("token"); // Lấy token từ localStorage
-      if (!token) {
-        alert("No token found! Please login first.");
-        return;
-      }
-
       try {
-        const response = await axios.get("https://koi-care-server.azurewebsites.net/api/blogs/get-all", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Gửi token trong header
-          },
-        });
+        const response = await axios.get(
+          "https://koi-care-server.azurewebsites.net/api/blogs/get-all"
+        );
         setBlogs(response.data.blogs); // Assume the response contains a blogs array
       } catch (error) {
         console.error("Error fetching blogs:", error);

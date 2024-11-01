@@ -40,7 +40,7 @@ const Navbar = () => {
     if (!token) {
       navigate("/login");
     } else {
-      navigate("/manageKoi");
+      navigate("/Managekoiandtank");
       setMenu("Quản lý cá Koi");
     }
   };

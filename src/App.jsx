@@ -5,7 +5,7 @@ import Home from "./pages/Home/Home";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Cart from "./pages/Cart/Cart";
 import Blog from "./pages/Blog/Blog";
-import ManageKoi from "./pages/ManageKoi/ManageKoi";
+import ManageKoiAndTank from "./pages/ManageKoi/ManageKoiAndTank";
 import Store from "./pages/Store/Store";
 import Login from "./pages/Login/Login";
 import BlogDetail from "./pages/Blog/BlogDetail";
@@ -19,7 +19,7 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
-        <Route path="/manageKoi" element={<ManageKoi />} />
+        <Route path="/Managekoiandtank" element={<ManageKoiAndTank />} />
         <Route path="/store" element={<Store />} />
         <Route path="/order" element={<PlaceOrder />} />
         <Route path="/login" element={<Login />} />

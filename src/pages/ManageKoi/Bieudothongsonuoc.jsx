@@ -11,7 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import "./KoiTank.css";
+import "./ManageFish";
 
 ChartJS.register(
   CategoryScale,
@@ -151,13 +151,13 @@ const CombinedParameterChart = ({ pond }) => {
       x: {
         title: {
           display: true,
-          text: 'Time',
+          text: "Time",
         },
       },
       y: {
         title: {
           display: true,
-          text: 'Values',
+          text: "Values",
         },
         beginAtZero: false,
       },
@@ -170,6 +170,5 @@ const CombinedParameterChart = ({ pond }) => {
     </div>
   );
 };
-
 
 export default KoiInfo;
