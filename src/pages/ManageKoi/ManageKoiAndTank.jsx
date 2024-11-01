@@ -20,6 +20,8 @@ const PondForm = () => {
 
   const [isOpen, setIsOpen] = useState(false); // State để quản lý hiển thị form
   const [showParameters, setShowParameters] = useState(false); // State để hiển thị PondParameters
+  const [showPoncard, setShowPoncard] = useState(true);
+  const [showKoiInfo, setShowKoiInfo] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -99,7 +101,16 @@ const PondForm = () => {
         Thêm Hồ Cá
       </button>
       <button className="parameters-button" onClick={toggleParameters}>
-        Thông số hồ
+        Nhập Thông số hồ
+      </button>
+      <button
+        className="parameters-chart-button"
+        onClick={() => {
+          setShowPoncard(!showPoncard);
+          setShowKoiInfo(!showKoiInfo);
+        }}
+      >
+        Biểu đồ thông số hồ
       </button>
 
       {showParameters ? (
@@ -237,8 +248,8 @@ const PondForm = () => {
           </div>
         )
       )}
-      <PondCard />
-      <KoiInfo />
+      {showPoncard && <PondCard />}
+      {showKoiInfo && <KoiInfo />}
     </div>
   );
 };

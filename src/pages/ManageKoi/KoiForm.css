@@ -115,6 +115,26 @@ select:focus {
     margin-top: 20px;
     margin-left: 20px;
 }
+.parameters-chart-button {
+    padding: 10px 20px; /* Kích thước padding cho nút */
+    border: none; /* Bỏ viền */
+    border-radius: 5px; /* Bo góc */
+    cursor: pointer; /* Con trỏ chuột sẽ hiển thị khi di chuột qua nút */
+    font-size: 16px; /* Kích thước chữ */
+    transition: background-color 0.3s, transform 0.3s; /* Hiệu ứng chuyển tiếp khi hover */
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.parameters-chart-button {
+    background-color: #9C27B0; /* Màu nền xanh dương */
+    color: white; /* Màu chữ trắng */
+    margin-left: 10px; /* Khoảng cách giữa hai nút */
+}
+
+.parameters-chart-button:hover {
+    background-color: #A569BD; /* Màu nền khi hover */
+    transform: translateY(-2px); /* Hiệu ứng nâng khi hover */
+}
 
 .add-pond-button {
     background-color: #4CAF50; /* Màu nền xanh lá cây */
