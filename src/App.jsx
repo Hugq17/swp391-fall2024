@@ -9,6 +9,7 @@ import ManageKoiAndTank from "./pages/ManageKoi/ManageKoiAndTank";
 import Store from "./pages/Store/Store";
 import Login from "./pages/Login/Login";
 import BlogDetail from "./pages/Blog/BlogDetail";
+import Register from "./pages/Register/Register";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/store" element={<Store />} />
         <Route path="/order" element={<PlaceOrder />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

@@ -450,7 +450,7 @@ const KoiFishTable = ({ pondId }) => {
       <table className="koi-table">
         <thead>
           <tr>
-            <th>ID</th>
+            {/* <th>ID</th> */}
             <th>Tên</th>
             <th>Giống</th>
             <th>Hình ảnh</th>
@@ -468,7 +468,7 @@ const KoiFishTable = ({ pondId }) => {
         <tbody>
           {koiFish.map((fish) => (
             <tr key={fish.id}>
-              <td>{fish.id}</td>
+              {/* <td>{fish.id}</td> */}
               <td>{fish.name}</td>
               <td>{fish.koiType}</td>
               <td>

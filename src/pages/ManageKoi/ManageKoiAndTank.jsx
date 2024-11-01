@@ -110,9 +110,8 @@ const PondForm = () => {
           setShowKoiInfo(!showKoiInfo);
         }}
       >
-        Biểu đồ thông số hồ
+        {showKoiInfo ? "Quản lý hồ cá" : "Biểu đồ thông số hồ"}
       </button>
-
       {showParameters ? (
         <PondParameters /> // Hiển thị nội dung từ PondParameters
       ) : (

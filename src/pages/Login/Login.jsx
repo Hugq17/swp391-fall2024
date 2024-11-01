@@ -38,11 +38,11 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <h1 className="login-title">Đăng nhập</h1>
-        <form onSubmit={handleSubmit} className="login-form">
-          <div className="form-group-login">
+    <div className="auth-container">
+      <div className="auth-box">
+        <h1 className="auth-title">Đăng nhập</h1>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group-auth">
             <label htmlFor="email">Email:</label>
             <input
               type="email"
@@ -53,9 +53,9 @@ const Login = () => {
             />
           </div>
 
-          <div className="form-group-login">
+          <div className="password-group">
             <label htmlFor="password">Password:</label>
-            <div className="password-wrapper">
+            <div className="password-input-field">
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
@@ -64,7 +64,7 @@ const Login = () => {
                 required
               />
               <span
-                className="toggle-password"
+                className="password-visibility-toggle"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? "🙈" : "👁️"} {/* Toggle visibility icon */}
@@ -72,12 +72,22 @@ const Login = () => {
             </div>
           </div>
 
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          {errorMessage && <p className="auth-error-message">{errorMessage}</p>}
 
-          <button type="submit" className="login-button">
+          <button type="submit" className="auth-submit-btn">
             Đăng nhập
           </button>
         </form>
+
+        <p className="auth-toggle-text">
+          Chưa có tài khoản?{" "}
+          <span
+            onClick={() => navigate("/register")}
+            className="auth-toggle-link"
+          >
+            Đăng ký ngay
+          </span>
+        </p>
       </div>
     </div>
   );

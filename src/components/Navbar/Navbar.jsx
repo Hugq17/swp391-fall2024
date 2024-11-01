@@ -74,7 +74,7 @@ const Navbar = () => {
           onClick={handleKoiManagementClick}
           className={menu === "Quản lý cá Koi" ? "active" : ""}
         >
-          <Link to="#" className="navbar-link">
+          <Link to="/Managekoiandtank" className="navbar-link">
             Quản lý cá Koi
           </Link>
         </li>
