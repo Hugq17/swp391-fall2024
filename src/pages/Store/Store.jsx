@@ -63,7 +63,7 @@ function ProductStore({ onCartUpdate }) {
     localStorage.setItem("cartItems", JSON.stringify(storedCart));
 
     // Cập nhật giỏ hàng ở Navbar
-    onCartUpdate(storedCart);
+    onCartUpdate(storedCart); // Gọi hàm callback để cập nhật giỏ hàng trong Navbar
   };
 
   return (

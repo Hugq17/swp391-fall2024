@@ -148,4 +148,12 @@
     /* Căn giữa theo chiều ngang */
     align-items: center;
     /* Căn giữa theo chiều dọc */
+    margin-right: 50px;
+}
+
+.logo-card {
+    font-size: 20px;
+    /* Hoặc bất kỳ kích thước nào bạn muốn */
+    color: #000;
+    /* Bạn có thể thay đổi màu sắc nếu cần */
 }

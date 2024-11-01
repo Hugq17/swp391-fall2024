@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 const Navbar = () => {
   const [menu, setMenu] = useState("Trang chủ");
@@ -89,7 +90,7 @@ const Navbar = () => {
       </ul>
       <div className="navbar-right">
         <div className="navbar-cart-icon" onClick={() => navigate("/cart")}>
-          <img className="img-logo" src={assets.cart} alt="Giỏ hàng" />
+          <MdOutlineShoppingCart className="logo-card" />
           {getTotalItemsInCart() > 0 && (
             <span className="cart-count">{getTotalItemsInCart()}</span>
           )}

@@ -24,6 +24,24 @@ const Cart = () => {
     localStorage.setItem("cartItems", JSON.stringify(updatedCart)); // Cập nhật localStorage
   };
 
+  const handleAddItem = (newItem) => {
+    const existingItem = cartItems.find((item) => item.id === newItem.id);
+    let updatedCart;
+
+    if (existingItem) {
+      updatedCart = cartItems.map((item) =>
+        item.id === newItem.id
+          ? { ...item, quantity: item.quantity + newItem.quantity }
+          : item
+      );
+    } else {
+      updatedCart = [...cartItems, newItem];
+    }
+
+    setCartItems(updatedCart);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCart)); // Cập nhật localStorage
+  };
+
   return (
     <div className="cart-container">
       <h2>Giỏ hàng của bạn</h2>
