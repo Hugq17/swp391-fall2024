@@ -15,16 +15,27 @@ const PondForm = () => {
     volume: "",
     drainageCount: "",
     pumpCapacity: "",
+    koiGroupId: null, // Khởi tạo với null
   });
 
   const [isOpen, setIsOpen] = useState(false); // State để quản lý hiển thị form
   const [showParameters, setShowParameters] = useState(false); // State để hiển thị PondParameters
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    // Kiểm tra xem trường nào đang được thay đổi
+    if (name === "koiGroupId") {
+      // Nếu chọn "Không", set koiGroupId thành null
+      setFormData({
+        ...formData,
+        [name]: value === "0" ? null : value, // Đặt giá trị thành null nếu chọn "Không"
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -38,7 +49,7 @@ const PondForm = () => {
 
     try {
       const response = await axios.post(
-        "https://koi-care-server.azurewebsites.net/api/ponds/save",
+        "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/ponds/save",
         {
           name: formData.name,
           imageUrl: formData.imageUrl,
@@ -48,6 +59,7 @@ const PondForm = () => {
           volume: parseFloat(formData.volume),
           drainageCount: parseInt(formData.drainageCount),
           pumpCapacity: parseFloat(formData.pumpCapacity),
+          koiGroupId: formData.koiGroupId, // Gửi giá trị koiGroupId
         },
         {
           headers: {
@@ -70,6 +82,7 @@ const PondForm = () => {
         volume: "",
         drainageCount: "",
         pumpCapacity: "",
+        koiGroupId: null, // Đặt lại về null
       });
     } catch (error) {
       console.error("There was an error saving the pond!", error);
@@ -101,6 +114,7 @@ const PondForm = () => {
               </button>
               <h1>Thêm Hồ Cá</h1>
               <form onSubmit={handleSubmit}>
+                {/* Các trường nhập liệu khác */}
                 <label>
                   Tên:
                   <input
@@ -187,6 +201,20 @@ const PondForm = () => {
                     onChange={handleChange}
                     required
                   />
+                </label>
+                <br />
+                {/* Dropdown để chọn koiGroupId */}
+                <label>
+                  Có nhóm Koi:
+                  <select
+                    name="koiGroupId"
+                    value={formData.koiGroupId || 0} // Đặt giá trị mặc định cho select
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="1">Có</option>
+                    <option value="0">Không</option>
+                  </select>
                 </label>
                 <br />
                 <button className="save-button" type="submit">
