@@ -113,116 +113,122 @@ const PondForm = () => {
               </button>
               <h1>Thêm Hồ Cá</h1>
               <form onSubmit={handleSubmit}>
-                {/* Các trường nhập liệu khác */}
-                <label>
-                  Tên:
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                <br />
-                <label>
-                  URL Ảnh:
-                  <input
-                    type="text"
-                    name="imageUrl"
-                    value={formData.imageUrl}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                <br />
-                <label>
-                  Chiều dài:
-                  <input
-                    type="number"
-                    name="length"
-                    value={formData.length}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                <br />
-                <label>
-                  Chiều rộng:
-                  <input
-                    type="number"
-                    name="width"
-                    value={formData.width}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                <br />
-                <label>
-                  Độ sâu:
-                  <input
-                    type="number"
-                    name="depth"
-                    value={formData.depth}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                <br />
-                <label>
-                  Thể tích:
-                  <input
-                    type="number"
-                    name="volume"
-                    value={formData.volume}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                <br />
-                <label>
-                  Số lượng cống thoát:
-                  <input
-                    type="number"
-                    name="drainageCount"
-                    value={formData.drainageCount}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                <br />
-                <label>
-                  Công suất máy bơm:
-                  <input
-                    type="number"
-                    name="pumpCapacity"
-                    value={formData.pumpCapacity}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                <br />
-                {/* Dropdown để chọn koiGroupId */}
-                <label>
-                  Nhóm Koi:
-                  <select
-                    name="koiGroupId"
-                    value={formData.koiGroupId || 0} // Đặt giá trị mặc định cho select
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="0">Không</option>
-                    <option value="1">
-                      Nhóm 1 - Taisho Sanke (Sanke) - Kohaku - Showa Sanshoku
-                      (Showa) - Utsurimono (Utsuri) - Bekko
-                    </option>
-                    <option value="2">Nhóm 2 - Shusui - Asagi</option>
-                    <option value="3">Nhóm 3 - Ogons - Tancho</option>
-                    <option value="4">Nhóm 4 - Kawarimono - Doitsu Koi</option>
-                    <option value="5">Nhóm 5 - Goshiki</option>
-                  </select>
-                </label>
-                <br />
+                <div className="form-row">
+                  <label>
+                    Tên:
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    URL Ảnh:
+                    <input
+                      type="text"
+                      name="imageUrl"
+                      value={formData.imageUrl}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
+                </div>
+
+                <div className="form-row">
+                  <label>
+                    Chiều dài:
+                    <input
+                      type="number"
+                      name="length"
+                      value={formData.length}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    Chiều rộng:
+                    <input
+                      type="number"
+                      name="width"
+                      value={formData.width}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    Độ sâu:
+                    <input
+                      type="number"
+                      name="depth"
+                      value={formData.depth}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
+                </div>
+
+                <div className="form-row">
+                  <label>
+                    Thể tích:
+                    <input
+                      type="number"
+                      name="volume"
+                      value={formData.volume}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    Số lượng cống thoát:
+                    <input
+                      type="number"
+                      name="drainageCount"
+                      value={formData.drainageCount}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    Công suất máy bơm:
+                    <input
+                      type="number"
+                      name="pumpCapacity"
+                      value={formData.pumpCapacity}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
+                </div>
+
+                <div className="form-row">
+                  <label>
+                    Nhóm Koi:
+                    <select
+                      name="koiGroupId"
+                      value={formData.koiGroupId || 0}
+                      onChange={handleChange}
+                      className="group-fish"
+                      required
+                    >
+                      <option value="0">Không</option>
+                      <option value="1">Nhóm 1 - Taisho Sanke</option>
+                      <option value="2">Nhóm 2 - Shusui - Asagi</option>
+                      <option value="3">Nhóm 3 - Ogons - Tancho</option>
+                      <option value="4">
+                        Nhóm 4 - Kawarimono - Doitsu Koi
+                      </option>
+                      <option value="5">Nhóm 5 - Goshiki</option>
+                    </select>
+                  </label>
+                </div>
+
                 <button className="save-button" type="submit">
                   Lưu Hồ Cá
                 </button>

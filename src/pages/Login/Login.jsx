@@ -30,7 +30,7 @@ const Login = () => {
       localStorage.setItem("token", response.data.accessToken);
       localStorage.setItem("userName", response.data.userName);
       alert("Login successful!");
-      navigate("/manageKoi");
+      navigate("/Managekoiandtank");
     } catch (error) {
       setErrorMessage("Login failed. Please check your email and password.");
       console.error("Login error:", error);
@@ -42,7 +42,7 @@ const Login = () => {
       <div className="login-box">
         <h1 className="login-title">Đăng nhập</h1>
         <form onSubmit={handleSubmit} className="login-form">
-          <div className="form-group">
+          <div className="form-group-login">
             <label htmlFor="email">Email:</label>
             <input
               type="email"
@@ -53,7 +53,7 @@ const Login = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group-login">
             <label htmlFor="password">Password:</label>
             <div className="password-wrapper">
               <input

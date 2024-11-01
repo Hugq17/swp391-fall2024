@@ -1,0 +1,135 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.pond-list {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: grid; /* Thêm dòng này để sử dụng grid */
+    grid-template-columns: repeat(5, 1fr); /* Tạo 5 cột với chiều rộng bằng nhau */
+    gap: 10px; /* Khoảng cách giữa các item */
+  }
+  
+  .pond-item {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px;
+  }
+  
+
+.pond-item:last-child {
+  border-bottom: none;
+}
+
+.pond-title {
+    font-size: 24px;
+    color: #333;
+    white-space: nowrap; /* Ngăn chặn việc xuống dòng */
+  }
+  
+
+.open-water-modal {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.open-water-modal:hover {
+  background-color: #0056b3;
+}
+
+/* Modal Styles */
+.water-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-body {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-body h2 {
+  margin: 0 0 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+/* Input Group Styles */
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.input-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Modal Action Buttons */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.save-water-parameters {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-water-parameters:hover {
+  background-color: #218838;
+}
+
+.close-water-modal {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-water-modal:hover {
+  background-color: #c82333;
+}

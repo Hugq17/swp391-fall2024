@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./ManageFish"; // Import CSS for styling
-
+import "./Pondparameters.css"; // Đảm bảo rằng tệp CSS được cập nhật với các class name mới
 const PondParameters = () => {
   const [ponds, setPonds] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showModals, setShowModals] = useState({}); // To manage which modals are open
+  const [showModals, setShowModals] = useState({}); // Quản lý trạng thái mở modal
 
   // Fetch all ponds data from the API
   useEffect(() => {
@@ -92,99 +91,100 @@ const PondParameters = () => {
   }
 
   return (
-    <div className="pond-container">
+    <div className="pond-list">
       {ponds.map((pond) => (
-        <div className="pond-card">
-          <div className="pond-card-child" key={pond.id}>
-            <h2 className="pond-name">{pond.name}</h2>
-
+        <div className="pond-item" key={pond.id}>
+          <div className="pond-details">
+            <h2 className="pond-title">{pond.name}</h2>
             <button
               onClick={() =>
                 setShowModals((prev) => ({ ...prev, [pond.id]: true }))
               }
-              className="open-modal-btn"
+              className="open-water-modal"
             >
               Nhập Thông Số Nước
             </button>
 
             {showModals[pond.id] && (
-              <div className="modal">
-                <div className="modal-content">
+              <div className="water-modal">
+                <div className="modal-body">
                   <h2>Nhập Thông Số Nước cho {pond.name}</h2>
-                  <div className="form-group">
-                    <label>Nhiệt độ (°C)</label>
-                    <input
-                      type="number"
-                      name="temperature"
-                      value={pond.waterParameter?.temperature || ""}
-                      onChange={(e) => handleWaterParameterChange(pond.id, e)}
-                      placeholder="Nhiệt độ"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Độ mặn (ppt)</label>
-                    <input
-                      type="number"
-                      name="salinity"
-                      value={pond.waterParameter?.salinity || ""}
-                      onChange={(e) => handleWaterParameterChange(pond.id, e)}
-                      placeholder="Độ mặn"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>pH</label>
-                    <input
-                      type="number"
-                      name="ph"
-                      value={pond.waterParameter?.ph || ""}
-                      onChange={(e) => handleWaterParameterChange(pond.id, e)}
-                      placeholder="pH"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Oxy (mg/L)</label>
-                    <input
-                      type="number"
-                      name="oxygen"
-                      value={pond.waterParameter?.oxygen || ""}
-                      onChange={(e) => handleWaterParameterChange(pond.id, e)}
-                      placeholder="Oxy"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>nO2 (mg/L)</label>
-                    <input
-                      type="number"
-                      name="nO2"
-                      value={pond.waterParameter?.nO2 || ""}
-                      onChange={(e) => handleWaterParameterChange(pond.id, e)}
-                      placeholder="nO2"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>nO3 (mg/L)</label>
-                    <input
-                      type="number"
-                      name="nO3"
-                      value={pond.waterParameter?.nO3 || ""}
-                      onChange={(e) => handleWaterParameterChange(pond.id, e)}
-                      placeholder="nO3"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>pO4 (mg/L)</label>
-                    <input
-                      type="number"
-                      name="pO4"
-                      value={pond.waterParameter?.pO4 || ""}
-                      onChange={(e) => handleWaterParameterChange(pond.id, e)}
-                      placeholder="pO4"
-                    />
+                  <div className="input-container">
+                    <div className="input-group">
+                      <label>Nhiệt độ (°C)</label>
+                      <input
+                        type="number"
+                        name="temperature"
+                        value={pond.waterParameter?.temperature || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="Nhiệt độ"
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label>Độ mặn (ppt)</label>
+                      <input
+                        type="number"
+                        name="salinity"
+                        value={pond.waterParameter?.salinity || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="Độ mặn"
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label>pH</label>
+                      <input
+                        type="number"
+                        name="ph"
+                        value={pond.waterParameter?.ph || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="pH"
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label>Oxy (mg/L)</label>
+                      <input
+                        type="number"
+                        name="oxygen"
+                        value={pond.waterParameter?.oxygen || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="Oxy"
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label>nO2 (mg/L)</label>
+                      <input
+                        type="number"
+                        name="nO2"
+                        value={pond.waterParameter?.nO2 || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="nO2"
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label>nO3 (mg/L)</label>
+                      <input
+                        type="number"
+                        name="nO3"
+                        value={pond.waterParameter?.nO3 || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="nO3"
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label>pO4 (mg/L)</label>
+                      <input
+                        type="number"
+                        name="pO4"
+                        value={pond.waterParameter?.pO4 || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="pO4"
+                      />
+                    </div>
                   </div>
                   <div className="modal-actions">
                     <button
                       onClick={() => handleSavePond(pond.id)}
-                      className="save-btn"
+                      className="save-water-parameters"
                     >
                       Lưu Thông Số
                     </button>
@@ -192,7 +192,109 @@ const PondParameters = () => {
                       onClick={() =>
                         setShowModals((prev) => ({ ...prev, [pond.id]: false }))
                       }
-                      className="close-btn"
+                      className="close-water-modal"
+                    >
+                      Đóng
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {showModals[pond.id] && (
+              <div className="water-modal">
+                <div className="modal-body">
+                  <h2>Nhập Thông Số Nước cho {pond.name}</h2>
+                  <div className="input-container">
+                    {" "}
+                    {/* New container for input fields */}
+                    <div className="input-group">
+                      <label>Nhiệt độ (°C)</label>
+                      <input
+                        type="number"
+                        name="temperature"
+                        value={pond.waterParameter?.temperature || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="Nhiệt độ"
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label>Độ mặn (ppt)</label>
+                      <input
+                        type="number"
+                        name="salinity"
+                        value={pond.waterParameter?.salinity || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="Độ mặn"
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label>pH</label>
+                      <input
+                        type="number"
+                        name="ph"
+                        value={pond.waterParameter?.ph || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="pH"
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label>Oxy (mg/L)</label>
+                      <input
+                        type="number"
+                        name="oxygen"
+                        value={pond.waterParameter?.oxygen || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="Oxy"
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label>nO2 (mg/L)</label>
+                      <input
+                        type="number"
+                        name="nO2"
+                        value={pond.waterParameter?.nO2 || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="nO2"
+                      />
+                    </div>
+                  </div>
+                  <div className="input-container">
+                    {" "}
+                    {/* Additional input row */}
+                    <div className="input-group">
+                      <label>nO3 (mg/L)</label>
+                      <input
+                        type="number"
+                        name="nO3"
+                        value={pond.waterParameter?.nO3 || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="nO3"
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label>pO4 (mg/L)</label>
+                      <input
+                        type="number"
+                        name="pO4"
+                        value={pond.waterParameter?.pO4 || ""}
+                        onChange={(e) => handleWaterParameterChange(pond.id, e)}
+                        placeholder="pO4"
+                      />
+                    </div>
+                  </div>
+                  <div className="modal-actions">
+                    <button
+                      onClick={() => handleSavePond(pond.id)}
+                      className="save-water-parameters"
+                    >
+                      Lưu Thông Số
+                    </button>
+                    <button
+                      onClick={() =>
+                        setShowModals((prev) => ({ ...prev, [pond.id]: false }))
+                      }
+                      className="close-water-modal"
                     >
                       Đóng
                     </button>
