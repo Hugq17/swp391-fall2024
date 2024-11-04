@@ -56,8 +56,8 @@ const Cart = () => {
     };
 
     // Lấy accessToken từ localStorage
-    const accessToken = localStorage.getItem("accessToken");
-
+    const accessToken = localStorage.getItem("token");
+    console.log(accessToken);
     try {
       const response = await fetch(
         "https://koi-care-server.azurewebsites.net/api/order/create",

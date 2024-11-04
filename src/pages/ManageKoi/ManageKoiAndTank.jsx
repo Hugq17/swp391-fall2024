@@ -8,6 +8,7 @@ import KoiInfo from "./Bieudothongsonuoc";
 const PondForm = () => {
   const [formData, setFormData] = useState({
     name: "",
+    imageUrl: "",
     length: "",
     width: "",
     depth: "",
@@ -17,11 +18,11 @@ const PondForm = () => {
     koiGroupId: null, // Khởi tạo với null
   });
 
-  const [imageFile, setImageFile] = useState(null); // State để lưu file ảnh
-  const [isOpen, setIsOpen] = useState(false); // State để quản lý hiển thị form
-  const [showParameters, setShowParameters] = useState(false); // State để hiển thị PondParameters
+  const [isOpen, setIsOpen] = useState(false);
+  const [showParameters, setShowParameters] = useState(false);
   const [showPoncard, setShowPoncard] = useState(true);
   const [showKoiInfo, setShowKoiInfo] = useState(false);
+  const [imageFile, setImageFile] = useState(null); // State để lưu file hình ảnh
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,13 +31,42 @@ const PondForm = () => {
         ...formData,
         [name]: value === "0" ? null : parseInt(value),
       });
-    } else if (name === "imageFile") {
-      setImageFile(e.target.files[0]); // Lưu file ảnh được chọn
     } else {
       setFormData({
         ...formData,
         [name]: value,
       });
+    }
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file); // Lưu trữ file hình ảnh
+  };
+
+  const uploadImage = async () => {
+    if (!imageFile) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", imageFile); // Thêm file vào FormData
+
+    try {
+      const response = await axios.post(
+        "https://koi-care-server.azurewebsites.net/api/image/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data.imageUrl; // Giả sử server trả về đường dẫn hình ảnh dưới thuộc tính imageUrl
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      alert("Lỗi tải lên hình ảnh, vui lòng thử lại.");
+      return null; // Trả về null nếu có lỗi
     }
   };
 
@@ -49,32 +79,18 @@ const PondForm = () => {
       return;
     }
 
+    const uploadedImageUrl = await uploadImage(); // Tải lên hình ảnh và nhận đường dẫn
+
+    if (!uploadedImageUrl) {
+      return; // Dừng nếu không có đường dẫn hình ảnh
+    }
+
     try {
-      // Tạo đối tượng FormData để upload ảnh
-      const formDataToUpload = new FormData();
-      formDataToUpload.append("file", imageFile); // Thêm file ảnh vào FormData
-
-      // Upload ảnh lên server và nhận URL
-      const uploadResponse = await axios.post(
-        "https://koi-care-server.azurewebsites.net/api/image/upload",
-        formDataToUpload,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      // Giả định API trả về URL của ảnh trong uploadResponse.data.url
-      const imageUrl = uploadResponse.data.url; // Nhận URL từ phản hồi
-
-      // Sau khi upload ảnh, gửi thông tin hồ cá
       const response = await axios.post(
         "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/ponds/save",
         {
           name: formData.name,
-          imageUrl: imageUrl, // Sử dụng URL đã nhận từ upload
+          imageUrl: uploadedImageUrl, // Sử dụng đường dẫn hình ảnh đã tải lên
           length: parseFloat(formData.length),
           width: parseFloat(formData.width),
           depth: parseFloat(formData.depth),
@@ -93,10 +109,10 @@ const PondForm = () => {
 
       alert("Pond saved successfully!");
       console.log(response.data);
-      setIsOpen(false); // Đóng form sau khi lưu thành công
-      // Reset form
+      setIsOpen(false);
       setFormData({
         name: "",
+        imageUrl: "",
         length: "",
         width: "",
         depth: "",
@@ -105,7 +121,7 @@ const PondForm = () => {
         pumpCapacity: "",
         koiGroupId: null,
       });
-      setImageFile(null); // Reset file ảnh
+      setImageFile(null); // Reset file hình ảnh
     } catch (error) {
       console.error("There was an error saving the pond!", error);
     }
@@ -159,9 +175,9 @@ const PondForm = () => {
                   <label>
                     URL Ảnh:
                     <input
-                      type="file"
-                      name="imageFile"
-                      onChange={handleChange}
+                      type="file" // Thay đổi từ text thành file
+                      accept="image/*"
+                      onChange={handleImageChange} // Gọi hàm khi có thay đổi
                       required
                     />
                   </label>
