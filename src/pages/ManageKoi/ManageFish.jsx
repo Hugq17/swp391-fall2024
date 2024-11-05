@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./ManageFish.css"; // Import file CSS cho bảng và modal
-import KoiFishTable from "./KoiFishTable"; // Nhập khẩu component KoiFishTable
+import "./ManageFish.css";
+import KoiFishTable from "./KoiFishTable";
 
 const ManageFish = () => {
   const [ponds, setPonds] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false); // Trạng thái để hiển thị modal
-  const [selectedPondId, setSelectedPondId] = useState(null); // Trạng thái lưu hồ cá được chọn để thêm cá
-  const [koiTypes, setKoiTypes] = useState([]); // Lưu danh sách giống cá
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPondId, setSelectedPondId] = useState(null);
+  const [koiTypes, setKoiTypes] = useState([]);
+  const [imageFile, setImageFile] = useState(null); // Thêm trạng thái cho file ảnh
+
   const [newFish, setNewFish] = useState({
     name: "",
     koiTypeId: "",
     age: "",
     length: "",
     weight: "",
-    gender: "1", // Mặc định là Giới tính đực
+    gender: "1",
     origin: "",
     shape: "",
     breed: "",
-    imageUrl: "",
   });
-  const handlePondChange = (pondId) => {
-    setSelectedPondId(pondId); // Cập nhật selectedPondId khi hồ cá thay đổi
-  };
+
   // Lấy danh sách hồ cá
   useEffect(() => {
     const fetchPonds = async () => {
@@ -71,7 +70,7 @@ const ManageFish = () => {
             },
           }
         );
-        setKoiTypes(response.data.koiTypes); // Lưu danh sách giống cá vào state
+        setKoiTypes(response.data.koiTypes);
       } catch (error) {
         console.error("There was an error fetching the koi types!", error);
       }
@@ -89,6 +88,36 @@ const ManageFish = () => {
     });
   };
 
+  // Xử lý chọn file ảnh
+  const handleImageChange = (e) => {
+    setImageFile(e.target.files[0]); // Lưu file ảnh
+  };
+
+  // Hàm tải ảnh lên và trả về URL
+  const uploadImage = async () => {
+    if (!imageFile) return null;
+
+    const formData = new FormData();
+    formData.append("file", imageFile);
+
+    try {
+      const response = await axios.post(
+        "https://koi-care-server.azurewebsites.net/api/image/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data.imageUrl;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      alert("Lỗi tải lên hình ảnh, vui lòng thử lại.");
+      return null;
+    }
+  };
+
   // Hàm gọi API thêm cá vào hồ
   const handleAddFish = async () => {
     const token = localStorage.getItem("token");
@@ -97,15 +126,23 @@ const ManageFish = () => {
       return;
     }
 
+    // Tải ảnh trước nếu có
+    const imageUrl = await uploadImage();
+    if (imageFile && !imageUrl) {
+      alert("Lỗi khi tải lên ảnh.");
+      return;
+    }
+
     const fishData = {
       ...newFish,
-      pondId: selectedPondId, // Thêm pondId vào dữ liệu gửi đi
-      koiTypeId: parseInt(newFish.koiTypeId), // Chuyển đổi thành số nguyên
+      pondId: selectedPondId,
+      koiTypeId: parseInt(newFish.koiTypeId),
       age: parseInt(newFish.age),
       weight: parseInt(newFish.weight),
       gender: parseInt(newFish.gender),
-      shape: parseFloat(newFish.shape), // Chuyển đổi thành số thực
+      shape: parseFloat(newFish.shape),
       length: parseFloat(newFish.length),
+      imageUrl, // Gán URL ảnh nếu có
     };
 
     try {
@@ -120,20 +157,19 @@ const ManageFish = () => {
       );
       if (response.status === 200) {
         alert("Cá đã được thêm thành công!");
-        setShowModal(false); // Đóng modal sau khi thêm cá
+        setShowModal(false);
         setNewFish({
-          // Reset form
           name: "",
           koiTypeId: "",
           age: "",
           length: "",
           weight: "",
-          gender: "",
+          gender: "1",
           origin: "",
           shape: "",
           breed: "",
-          imageUrl: "",
         });
+        setImageFile(null); // Reset file ảnh
       }
     } catch (error) {
       console.error("There was an error adding the fish!", error);
@@ -142,7 +178,7 @@ const ManageFish = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Hiển thị khi đang tải
+    return <div>Loading...</div>;
   }
 
   return (
@@ -165,15 +201,13 @@ const ManageFish = () => {
             </p>
           </div>
 
-          {/* Bảng hiển thị cá trong hồ */}
           <KoiFishTable pondId={pond.id} />
 
-          {/* Nút để mở modal thêm cá */}
           <button
             className="button-add-fish"
             onClick={() => {
-              setSelectedPondId(pond.id); // Lưu id hồ cá hiện tại để thêm cá
-              setShowModal(true); // Mở modal thêm cá
+              setSelectedPondId(pond.id);
+              setShowModal(true);
             }}
           >
             + Thêm Cá
@@ -181,7 +215,6 @@ const ManageFish = () => {
         </div>
       ))}
 
-      {/* Modal hiển thị form thêm cá */}
       {showModal && (
         <div className="modal">
           <div className="modal-content">
@@ -268,28 +301,18 @@ const ManageFish = () => {
               onChange={handleInputChange}
               required
             />
-            <label>Hình ảnh URL:</label>
-            <input
-              type="text"
-              name="imageUrl"
-              value={newFish.imageUrl}
-              onChange={handleInputChange}
-              required
-            />
+            <label>Hình ảnh:</label>
+            <input type="file" onChange={handleImageChange} />
 
             <div className="modal-buttons">
               <button onClick={handleAddFish}>Thêm Cá</button>
               <button onClick={() => setShowModal(false)}>Hủy</button>
             </div>
           </div>
-          <KoiFishTable pondId={selectedPondId} />;
         </div>
       )}
     </div>
   );
 };
-
-// Component hiển thị bảng cá Koi trong từng hồ (KoiFishTable)
-// Component hiển thị bảng cá Koi trong từng hồ (KoiFishTable)
 
 export default ManageFish;

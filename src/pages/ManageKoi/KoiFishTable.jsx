@@ -194,10 +194,18 @@ const KoiFishTable = ({ pondId }) => {
               <td>{fish.shape}</td>
               <td>{fish.breed}</td>
               <td>
-                <button onClick={() => openFormModal(fish)}>Cập nhật</button>
+                <button
+                  className="update-button"
+                  onClick={() => openFormModal(fish)}
+                >
+                  Cập nhật
+                </button>
               </td>
               <td>
-                <button onClick={() => fetchGrowthData(fish)}>
+                <button
+                  className="chart-button"
+                  onClick={() => fetchGrowthData(fish)}
+                >
                   Xem biểu đồ
                 </button>
               </td>
