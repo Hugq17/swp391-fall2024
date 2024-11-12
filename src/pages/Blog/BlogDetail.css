@@ -1,0 +1,45 @@
+.blog-detail-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Chiều cao tối thiểu 100% viewport */
+    padding: 20px;
+}
+
+.blog-detail {
+    max-width: 600px;
+    /* Đặt chiều rộng tối đa */
+    width: 100%;
+    /* Đảm bảo nó không mở rộng vượt quá container */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+.blog-image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.blog-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.loading-container,
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Chiều cao tối thiểu 100% viewport */
+}
+
+.loading-spinner {
+    font-size: 18px;
+}

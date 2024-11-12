@@ -200,6 +200,18 @@ const ManageFish = () => {
               <strong>Thể tích:</strong> {pond.volume} L
             </p>
             <p className="pond-dimension">
+              <strong>Độ tuổi trung bình:</strong> {pond.ageRange} tuổi
+            </p>
+            <p className="pond-dimension">
+              <strong>Giới tính:</strong>{" "}
+              {pond.gender === 1
+                ? "Đực"
+                : pond.gender === 2
+                ? "Cái"
+                : "Không xác định"}
+            </p>
+
+            <p className="pond-dimension">
               <strong>Nhóm hồ cá:</strong>{" "}
               {pond.koiGroupId === 1 &&
                 "Taisho Sanke (Sanke), Kohaku, Showa Sanshoku (Showa), Utsurimono (Utsuri), Bekko"}

@@ -29,7 +29,7 @@ const Login = () => {
 
       localStorage.setItem("token", response.data.accessToken);
       localStorage.setItem("userName", response.data.userName);
-      alert("Login successful!");
+      alert("Đăng nhập thành công");
       navigate("/Managekoiandtank");
     } catch (error) {
       setErrorMessage("Đăng nhập thất bại, vui lòng kiểm tra lại thông tin.");

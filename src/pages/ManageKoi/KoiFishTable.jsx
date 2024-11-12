@@ -12,6 +12,30 @@ const KoiFishTable = ({ pondId }) => {
   const [length, setLength] = useState("");
   const [weight, setWeight] = useState("");
   const [growthData, setGrowthData] = useState(null);
+  const [feedingInfo, setFeedingInfo] = useState(null);
+
+  const fetchFeedingInfo = async (pondId) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("No token found! Please login first.");
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/feeding/serving-size?PondId=${pondId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setFeedingInfo(response.data);
+    } catch (error) {
+      console.error("Error fetching feeding information", error);
+      alert("Could not retrieve feeding information.");
+    }
+  };
 
   useEffect(() => {
     const fetchKoiFish = async () => {
@@ -172,6 +196,7 @@ const KoiFishTable = ({ pondId }) => {
             <th>Dòng giống</th>
             <th>Kích thước</th>
             <th>Xem biểu đồ</th>
+            <th>Xem lượng thức ăn</th>
           </tr>
         </thead>
         <tbody>
@@ -207,6 +232,14 @@ const KoiFishTable = ({ pondId }) => {
                   onClick={() => fetchGrowthData(fish)}
                 >
                   Xem biểu đồ
+                </button>
+              </td>
+              <td>
+                <button
+                  className="feeding-button"
+                  onClick={() => fetchFeedingInfo(pondId)}
+                >
+                  Lượng thức ăn cần thiết
                 </button>
               </td>
             </tr>
@@ -248,6 +281,43 @@ const KoiFishTable = ({ pondId }) => {
             <h3>Biểu đồ phát triển của {selectedFish.name}</h3>
             <Line data={getChartData()} />
             <button onClick={() => setShowChartModal(false)}>Đóng</button>
+          </div>
+        </div>
+      )}
+      {/* Hiển thị modal nếu có dữ liệu feedingInfo */}
+      {feedingInfo && (
+        <div className="modal">
+          <div className="modal-content">
+            <h3>Thông tin lượng thức ăn cho hồ</h3>
+            <p>
+              <strong>ID:</strong> {feedingInfo.id}
+            </p>
+            <p>
+              <strong>Khoảng tuổi:</strong> {feedingInfo.ageRange}
+            </p>
+            <p>
+              <strong>Mô tả khoảng tuổi:</strong>{" "}
+              {feedingInfo.ageRangeDescription}
+            </p>
+            <p>
+              <strong>Tỷ lệ trọng lượng:</strong>
+              {/* Hiển thị kết quả nhân weightPercent với weight của tất cả cá trong hồ */}
+              {koiFish
+                .reduce(
+                  (total, fish) =>
+                    total + (feedingInfo.weightPercent * fish.weight) / 100,
+                  0
+                )
+                .toFixed(2)}{" "}
+              g
+            </p>
+            <p>
+              <strong>Mô tả thức ăn:</strong> {feedingInfo.foodDescription}
+            </p>
+            <p>
+              <strong>Tần suất hàng ngày:</strong> {feedingInfo.dailyFrequency}
+            </p>
+            <button onClick={() => setFeedingInfo(null)}>Đóng</button>
           </div>
         </div>
       )}

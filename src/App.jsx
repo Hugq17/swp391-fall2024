@@ -11,6 +11,7 @@ import Login from "./pages/Login/Login";
 import BlogDetail from "./pages/Blog/BlogDetail";
 import Register from "./pages/Register/Register";
 import SuccessPage from "./pages/Cart/SuccessPage";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/success" element={<SuccessPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 };
