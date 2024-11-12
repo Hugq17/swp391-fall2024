@@ -69,11 +69,17 @@ function ProductStore({ onCartUpdate }) {
   return (
     <div className="store-container">
       <aside className="category-sidebar">
-        <h3>Ngành hàng</h3>
+        <h3>Danh mục sản phẩm</h3>
         {error ? (
           <p>{error}</p>
         ) : (
-          <ul>
+          <ul className="category-list">
+            <li
+              onClick={() => handleCategoryClick(null)} // Đặt selectedCategory về null để hiển thị tất cả sản phẩm
+              className={!selectedCategory ? "selected" : ""}
+            >
+              Tất cả sản phẩm
+            </li>
             {categories.map((category) => (
               <li
                 key={category.id}
