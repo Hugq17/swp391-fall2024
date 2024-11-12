@@ -199,6 +199,16 @@ const ManageFish = () => {
             <p className="pond-dimension">
               <strong>Thể tích:</strong> {pond.volume} L
             </p>
+            <p className="pond-dimension">
+              <strong>Nhóm hồ cá:</strong>{" "}
+              {pond.koiGroupId === 1 &&
+                "Taisho Sanke (Sanke), Kohaku, Showa Sanshoku (Showa), Utsurimono (Utsuri), Bekko"}
+              {pond.koiGroupId === 2 && "Shusui, Asagi"}
+              {pond.koiGroupId === 3 && "Ogons, Tancho"}
+              {pond.koiGroupId === 4 && "Kawarimono, Doitsu Koi"}
+              {pond.koiGroupId === 5 && "Goshiki"}
+              {pond.koiGroupId === null && "Cá tùy chọn"}
+            </p>
           </div>
 
           <KoiFishTable pondId={pond.id} />

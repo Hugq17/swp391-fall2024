@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./Cart.css";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
+  const navigate = useNavigate(); // Hook để chuyển hướng
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -75,6 +77,9 @@ const Cart = () => {
         alert("Đơn hàng đã được gửi thành công!");
         setCartItems([]);
         localStorage.removeItem("cartItems");
+
+        // Chuyển hướng đến trang thanh toán thành công
+        navigate("/success");
       } else {
         alert("Có lỗi xảy ra khi gửi đơn hàng.");
       }
