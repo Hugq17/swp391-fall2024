@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Content.css";
+import axios from "axios";
 import thietbibeca from "../../assets/thietbibeca.jpg";
 import phukientrangtribeca from "../../assets/phukientrangtribeca.png";
 import thucanchoca from "../../assets/thucanchoca.jpg";
 import thuoccakoi from "../../assets/thuoccakoi.jpg";
 import hoca from "../../assets/hoca.jpg";
 const Content = () => {
+  const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.get(
+          "https://koi-care-server.azurewebsites.net/api/blogs/get-all"
+        );
+        setBlogs(response.data.blogs.slice(0, 5)); // Lấy 5 bài viết đầu tiên
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
   return (
     <div>
       <div class="card-container">
@@ -58,27 +74,17 @@ const Content = () => {
           <hr className="line" />
         </div>
       </div>
-      <div class="card-product">
-        <div class="card-product-child">
-          <img class="imgProduct" />
-          <div class="card-content-child">Bài viết 1</div>
-        </div>
-        <div class="card-product-child">
-          <img class="imgProduct" />
-          <div class="card-content-child">Bài viết 2</div>
-        </div>
-        <div class="card-product-child">
-          <img class="imgProduct" />
-          <div class="card-content-child">Bài viết 3</div>
-        </div>
-        <div class="card-product-child">
-          <img class="imgProduct" />
-          <div class="card-content-child">Bài viết 4</div>
-        </div>
-        <div class="card-product-child">
-          <img class="imgProduct" />
-          <div class="card-content-child">Bài viết 5</div>
-        </div>
+      <div className="card-product">
+        {blogs.map((blog, index) => (
+          <div className="card-product-child" key={blog.id}>
+            <img
+              className="imgProduct"
+              src={blog.image}
+              alt={`Bài viết ${index + 1}`}
+            />
+            <div className="card-content-child">{blog.title}</div>
+          </div>
+        ))}
       </div>
     </div>
   );
