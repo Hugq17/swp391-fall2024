@@ -16,6 +16,8 @@ const PondForm = () => {
     drainageCount: "",
     pumpCapacity: "",
     koiGroupId: null, // Khởi tạo với null
+    gender: "", // Thêm trường gender
+    ageRange: "", // Thêm trường ageRange
   });
 
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +28,7 @@ const PondForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "koiGroupId") {
+    if (name === "koiGroupId" || name === "gender") {
       setFormData({
         ...formData,
         [name]: value === "0" ? null : parseInt(value),
@@ -97,6 +99,8 @@ const PondForm = () => {
           volume: parseFloat(formData.volume),
           drainageCount: parseInt(formData.drainageCount),
           pumpCapacity: parseFloat(formData.pumpCapacity),
+          gender: parseInt(formData.gender),
+          ageRange: parseInt(formData.ageRange),
           koiGroupId: formData.koiGroupId,
         },
         {
@@ -272,6 +276,34 @@ const PondForm = () => {
                       </option>
                       <option value="5">Nhóm 5 - Goshiki</option>
                     </select>
+                  </label>
+                </div>
+                <div className="form-row">
+                  <label>
+                    Giới tính:
+                    <select
+                      name="gender"
+                      value={formData.gender}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Chọn giới tính</option>
+                      <option value="1">Đực</option>
+                      <option value="2">Cái</option>
+                    </select>
+                  </label>
+                </div>
+                {/* Thêm phần tuổi trung bình */}
+                <div className="form-row">
+                  <label>
+                    Tuổi trung bình (năm):
+                    <input
+                      type="number"
+                      name="ageRange"
+                      value={formData.ageRange}
+                      onChange={handleChange}
+                      required
+                    />
                   </label>
                 </div>
 
