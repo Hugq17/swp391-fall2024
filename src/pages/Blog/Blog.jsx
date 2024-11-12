@@ -1,24 +1,21 @@
-// BlogList.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./BlogList.css"; // Import CSS for styling
+import "./BlogList.css";
 
 const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch all blogs data from the API
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get(
           "https://koi-care-server.azurewebsites.net/api/blogs/get-all"
         );
-        setBlogs(response.data.blogs); // Assume the response contains a blogs array
+        setBlogs(response.data.blogs);
       } catch (error) {
         console.error("Error fetching blogs:", error);
-        alert("Error fetching blogs. Please try again.");
       } finally {
         setLoading(false);
       }
@@ -28,20 +25,48 @@ const BlogList = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading state
+    return <div>Loading...</div>;
   }
+
+  // Separate the first blog as featured and the rest as sidebar items
+  const [featuredBlog, ...sidebarBlogs] = blogs;
 
   return (
     <div className="blog-container">
-      {blogs.map((blog) => (
-        <div className="blog-card" key={blog.id}>
-          <h2 className="blog-title">{blog.title}</h2>
-          <p className="blog-summary">{blog.summary}</p>
-          <Link to={`/blog/${blog.id}`} className="read-more">
-            Đọc thêm
-          </Link>
-        </div>
-      ))}
+      <div className="featured">
+        {featuredBlog && (
+          <>
+            {featuredBlog.image && (
+              <img
+                src={featuredBlog.image}
+                alt={featuredBlog.title}
+                className="featured-image"
+              />
+            )}
+            <h2 className="featured-title">{featuredBlog.title}</h2>
+            <p className="featured-summary">{featuredBlog.summary}</p>
+            <Link to={`/blog/${featuredBlog.id}`} className="read-more">
+              Đọc thêm
+            </Link>
+          </>
+        )}
+      </div>
+      <div className="sidebar">
+        {sidebarBlogs.map((blog) => (
+          <div className="sidebar-item" key={blog.id}>
+            {blog.image && (
+              <img
+                src={blog.image}
+                alt={blog.title}
+                className="sidebar-image"
+              />
+            )}
+            <Link to={`/blog/${blog.id}`} className="sidebar-title">
+              {blog.title}
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

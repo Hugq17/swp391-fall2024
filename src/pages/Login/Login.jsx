@@ -32,7 +32,7 @@ const Login = () => {
       alert("Login successful!");
       navigate("/Managekoiandtank");
     } catch (error) {
-      setErrorMessage("Login failed. Please check your email and password.");
+      setErrorMessage("Đăng nhập thất bại, vui lòng kiểm tra lại thông tin.");
       console.error("Login error:", error);
     }
   };
@@ -67,13 +67,11 @@ const Login = () => {
                 className="password-visibility-toggle"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? "🙈" : "👁️"} {/* Toggle visibility icon */}
+                {showPassword ? "🙈" : "👁️"}
               </span>
             </div>
           </div>
-
           {errorMessage && <p className="auth-error-message">{errorMessage}</p>}
-
           <button type="submit" className="auth-submit-btn">
             Đăng nhập
           </button>
