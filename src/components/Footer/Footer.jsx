@@ -50,19 +50,22 @@ function Footer() {
               <ul>
                 <li>
                   <FaFacebookF />{" "}
-                  <a href="#" target="_blank">
+                  <a href="https://www.facebook.com/hugq17" target="_blank">
                     Facebook
                   </a>
                 </li>
                 <li>
                   <FaInstagram />{" "}
-                  <a href="#" target="_blank">
+                  <a
+                    href="https://www.instagram.com/nobihug17/"
+                    target="_blank"
+                  >
                     Instagram
                   </a>
                 </li>
                 <li>
                   <FaTwitter />{" "}
-                  <a href="#" target="_blank">
+                  <a href="https://x.com/?lang=vi" target="_blank">
                     Twitter
                   </a>
                 </li>
@@ -71,7 +74,7 @@ function Footer() {
           </div>
         </div>
         <div className="copyright">
-          <p>&copy; 2024 Koiking Official. All rights reserved.</p>
+          <p>&copy; 2024 Bản quyền của KoiKing.</p>
         </div>
       </footer>
     </>

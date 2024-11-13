@@ -12,6 +12,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password.length < 8) {
+      setErrorMessage("Mật khẩu phải có ít nhất 8 ký tự.");
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -71,14 +75,27 @@ const Login = () => {
               </span>
             </div>
           </div>
-          {errorMessage && <p className="auth-error-message">{errorMessage}</p>}
+          {errorMessage && (
+            <div>
+              <p className="auth-error-message">{errorMessage}</p>
+              {/* Thêm liên kết chuyển đến trang quên mật khẩu */}
+              <p className="forgot-password-link">
+                <span
+                  onClick={() => navigate("/forgot-password")}
+                  className="auth-toggle-link"
+                >
+                  Quên mật khẩu?
+                </span>
+              </p>
+            </div>
+          )}
           <button type="submit" className="auth-submit-btn">
             Đăng nhập
           </button>
         </form>
 
         <p className="auth-toggle-text">
-          Chưa có tài khoản?{" "}
+          Chưa có tài khoản ?{" "}
           <span
             onClick={() => navigate("/register")}
             className="auth-toggle-link"

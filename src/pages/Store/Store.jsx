@@ -116,7 +116,10 @@ function ProductStore({ onCartUpdate }) {
                   <p className="product-price">
                     Giá: {product.price.toLocaleString("vi-VN")} VND
                   </p>
-                  <button onClick={() => addToCart(product)}>
+                  <button
+                    className="button-add-cart"
+                    onClick={() => addToCart(product)}
+                  >
                     Thêm vào giỏ
                   </button>
                 </div>

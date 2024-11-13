@@ -21,6 +21,11 @@ const Register = () => {
       return;
     }
 
+    if (password.length < 8) {
+      setErrorMessage("Mật khẩu phải có ít nhất 8 ký tự.");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/account/register",
@@ -46,84 +51,81 @@ const Register = () => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-box">
-        <h1 className="auth-title">Đăng ký</h1>
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group-auth">
-            <label htmlFor="username">Tên đăng nhập:</label>
+    <div className="form-container">
+      <h1 className="auth-title">Đăng ký</h1>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <div className="form-group-auth">
+          <label htmlFor="username">Tên đăng nhập:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group-auth">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="password-group">
+          <label htmlFor="password">Mật khẩu:</label>
+          <div className="password-input-field">
             <input
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type={showPassword ? "text" : "password"}
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <span
+              className="password-visibility-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🙈" : "👁️"} {/* Biểu tượng ẩn/hiện mật khẩu */}
+            </span>
           </div>
+        </div>
 
-          <div className="form-group-auth">
-            <label htmlFor="email">Email:</label>
+        <div className="password-group">
+          <label htmlFor="confirmPassword">Xác nhận mật khẩu:</label>
+          <div className="password-input-field">
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type={showPassword ? "text" : "password"}
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
+            <span
+              className="password-visibility-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🙈" : "👁️"} {/* Biểu tượng ẩn/hiện mật khẩu */}
+            </span>
           </div>
+        </div>
 
-          <div className="password-group">
-            <label htmlFor="password">Mật khẩu:</label>
-            <div className="password-input-field">
-              <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <span
-                className="password-visibility-toggle"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "🙈" : "👁️"} {/* Biểu tượng ẩn/hiện mật khẩu */}
-              </span>
-            </div>
-          </div>
+        {errorMessage && <p className="auth-error-message">{errorMessage}</p>}
 
-          <div className="password-group">
-            <label htmlFor="confirmPassword">Xác nhận mật khẩu:</label>
-            <div className="password-input-field">
-              <input
-                type={showPassword ? "text" : "password"}
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-              <span
-                className="password-visibility-toggle"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "🙈" : "👁️"} {/* Biểu tượng ẩn/hiện mật khẩu */}
-              </span>
-            </div>
-          </div>
-
-          {errorMessage && <p className="auth-error-message">{errorMessage}</p>}
-
-          <button type="submit" className="auth-submit-btn">
-            Đăng ký
-          </button>
-        </form>
-
-        <p className="auth-toggle-text">
-          Đã có tài khoản?{" "}
-          <span onClick={() => navigate("/login")} className="auth-toggle-link">
-            Đăng nhập
-          </span>
-        </p>
-      </div>
+        <button type="submit" className="auth-submit-btn">
+          Đăng ký
+        </button>
+      </form>
+      <p className="auth-toggle-text-register">
+        Đã có tài khoản ? {"  "}
+        <span onClick={() => navigate("/login")} className="auth-toggle-link">
+          Đăng nhập ngay
+        </span>
+      </p>
     </div>
   );
 };

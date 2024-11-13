@@ -1,109 +1,73 @@
-/* Login.css */
-
-.auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    padding: 0 20px;
-}
-
-.auth-box {
-    background-color: #ffffff;
-    padding: 40px;
-    max-width: 400px;
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-top: 15%;
-}
-
-.auth-title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #333333;
-    margin-bottom: 30px;
+.form-container {
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-top: 20px;
 }
 
 .auth-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    width: 100%;
+    padding: 20px;
 }
 
 .form-group-auth {
     margin-bottom: 20px;
-    width: 100%;
 }
 
-label {
-    font-size: 14px;
-    color: #666666;
-    margin-bottom: 8px;
+.form-group-auth label {
     display: block;
-    text-align: left;
+    margin-bottom: 10px;
 }
 
-input[type="email"],
-input[type="password"] {
+.form-group-auth input {
     width: 100%;
-    padding: 12px 40px 12px 12px;
-    /* Extra padding-right to accommodate the icon */
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    color: #333;
-    outline: none;
-    transition: border-color 0.3s;
+    /* Đảm bảo ô input chiếm hết chiều rộng của phần tử chứa */
+    height: 40px;
+    /* Đảm bảo chiều cao của các ô input bằng nhau */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     box-sizing: border-box;
-}
-
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-color: #5a67d8;
+    /* Đảm bảo kích thước của input bao gồm padding và border */
 }
 
 .password-group {
     position: relative;
-    width: 100%;
 }
 
 .password-input-field {
-    display: flex;
-    align-items: center;
-    width: 100%;
+    position: relative;
 }
 
 .password-visibility-toggle {
     position: absolute;
-    right: 12px;
-    font-size: 18px;
-    color: #888;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
     cursor: pointer;
-}
-
-.auth-error-message {
-    color: #ff4c4c;
-    font-size: 14px;
-    margin-top: -10px;
-    margin-bottom: 20px;
 }
 
 .auth-submit-btn {
-    padding: 12px;
     width: 100%;
-    background-color: #5a67d8;
-    color: #ffffff;
+    /* Đảm bảo nút submit cũng chiếm hết chiều rộng */
+    height: 40px;
+    padding: 10px;
     border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 50px;
 }
 
 .auth-submit-btn:hover {
-    background-color: #4c51bf;
+    background-color: #3e8e41;
+}
+
+.auth-toggle-text-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,0 +1,13 @@
+/* app.css */
+.app {
+    display: flex;
+    flex-direction: column;
+    /* Các phần tử con được sắp xếp theo chiều dọc */
+    min-height: 100vh;
+    /* Đảm bảo chiều cao của app ít nhất bằng chiều cao màn hình */
+}
+
+.main-content {
+    flex: 1;
+    /* Làm cho phần nội dung chiếm toàn bộ không gian còn lại */
+}

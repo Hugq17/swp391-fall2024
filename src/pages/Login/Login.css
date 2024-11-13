@@ -1,75 +1,78 @@
 /* Login.css */
 
 .auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  padding: 0 20px;
 }
 
 .auth-box {
-    background-color: #ffffff;
-    padding: 40px;
-    max-width: 400px;
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-top: 15%;
+  background-color: #ffffff;
+  padding: 40px;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 15%;
+  margin-bottom: 10%;
 }
 
 .auth-title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #333333;
-    margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 30px;
 }
 
 .auth-form {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #f8f9fa;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-  .form-group-auth, .password-group {
-    margin-bottom: 20px;
-  }
-  .form-group-auth label,
-  .password-group label {
-    font-weight: bold;
-    color: #333;
-    display: block;
-    margin-bottom: 8px;
-  }
-  
+.form-group-auth,
+.password-group {
+  margin-bottom: 20px;
+}
+
+.form-group-auth label,
+.password-group label {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 8px;
+}
+
 
 input[type="email"],
 input[type="password"] {
-    width: 100%;
-    padding: 12px 40px 12px 12px;
-    /* Extra padding-right to accommodate the icon */
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    color: #333;
-    outline: none;
-    transition: border-color 0.3s;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  /* Extra padding-right to accommodate the icon */
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
 }
 
 input[type="email"]:focus,
 input[type="password"]:focus {
-    border-color: #5a67d8;
+  border-color: #5a67d8;
 }
 
 .password-group {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .form-group-auth input,
@@ -83,33 +86,47 @@ input[type="password"]:focus {
 }
 
 .password-visibility-toggle {
-    position: absolute;
-    right: 12px;
-    font-size: 18px;
-    color: #888;
-    cursor: pointer;
+  position: absolute;
+  right: 12px;
+  font-size: 18px;
+  color: #888;
+  cursor: pointer;
 }
 
 .auth-error-message {
-    color: red;
-    font-size: 14px;
-  }
-  
+  color: red;
+  font-size: 14px;
+}
+
 
 .auth-submit-btn {
-    padding: 12px;
-    width: 100%;
-    background-color: #5a67d8;
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 50px;
+  padding: 12px;
+  width: 100%;
+  background-color: #5a67d8;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 50px;
 }
 
 .auth-submit-btn:hover {
-    background-color: #4c51bf;
+  background-color: #4c51bf;
+}
+
+.forgot-password-link {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.auth-toggle-link {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.auth-toggle-link:hover {
+  text-decoration: underline;
 }

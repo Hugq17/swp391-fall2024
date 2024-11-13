@@ -26,9 +26,12 @@
 }
 
 .category-list li.selected {
-    background-color: #007bff;
-    color: white;
+    /* background-color: #007bff; */
+    color: black;
+    font-weight: bold;
+    /* Thêm dòng này để chữ in đậm khi được chọn */
 }
+
 
 
 .product-display {
@@ -62,4 +65,12 @@
 .product-price {
     font-weight: bold;
     margin: 10px 0;
+}
+
+.button-add-cart {
+    background-color: #2ecc71;
+}
+
+.button-add-cart:hover {
+    background-color: #1abc9c;
 }
