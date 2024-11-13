@@ -1,39 +1,38 @@
 /* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
-}
+
 
 .pond-list {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: grid; /* Thêm dòng này để sử dụng grid */
-    grid-template-columns: repeat(5, 1fr); /* Tạo 5 cột với chiều rộng bằng nhau */
-    gap: 10px; /* Khoảng cách giữa các item */
-  }
-  
-  .pond-item {
-    border-bottom: 1px solid #e0e0e0;
-    padding: 15px;
-  }
-  
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: grid;
+  /* Thêm dòng này để sử dụng grid */
+  grid-template-columns: repeat(5, 1fr);
+  /* Tạo 5 cột với chiều rộng bằng nhau */
+  gap: 10px;
+  /* Khoảng cách giữa các item */
+}
+
+.pond-item {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 15px;
+}
+
 
 .pond-item:last-child {
   border-bottom: none;
 }
 
 .pond-title {
-    font-size: 24px;
-    color: #333;
-    white-space: nowrap; /* Ngăn chặn việc xuống dòng */
-  }
-  
+  font-size: 24px;
+  color: #333;
+  white-space: nowrap;
+  /* Ngăn chặn việc xuống dòng */
+}
+
 
 .open-water-modal {
   background-color: #007bff;
@@ -79,6 +78,7 @@ body {
 /* Input Group Styles */
 .input-group {
   margin-bottom: 15px;
+  margin-right: 15px;
 }
 
 .input-group label {
@@ -88,7 +88,7 @@ body {
 }
 
 .input-group input {
-  width: 100%;
+  width: 90%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;

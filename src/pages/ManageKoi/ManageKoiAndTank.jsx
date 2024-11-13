@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./KoiForm.css"; // Import file CSS
+import "./ManageKoiAndTank.css"; // Import file CSS
 import PondCard from "./ManageFish";
 import PondParameters from "./Pondparameters"; // Import PondParameters component
 import KoiInfo from "./Bieudothongsonuoc";
 
-const PondForm = () => {
+const ManageKoiAndTank = () => {
   const [formData, setFormData] = useState({
     name: "",
     imageUrl: "",
@@ -15,19 +15,25 @@ const PondForm = () => {
     volume: "",
     drainageCount: "",
     pumpCapacity: "",
-    koiGroupId: null, // Khởi tạo với null
-    gender: "", // Thêm trường gender
-    ageRange: "", // Thêm trường ageRange
+    koiGroupId: null,
+    gender: "",
+    ageRange: "",
   });
 
   const [isOpen, setIsOpen] = useState(false);
   const [showParameters, setShowParameters] = useState(false);
   const [showPoncard, setShowPoncard] = useState(true);
   const [showKoiInfo, setShowKoiInfo] = useState(false);
-  const [imageFile, setImageFile] = useState(null); // State để lưu file hình ảnh
+  const [imageFile, setImageFile] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (value < 0) {
+      alert("Giá trị không được âm!");
+      return;
+    }
+
+    // Nếu giá trị không âm, tiến hành cập nhật formData
     if (name === "koiGroupId" || name === "gender") {
       setFormData({
         ...formData,
@@ -246,7 +252,7 @@ const PondForm = () => {
                   </label>
 
                   <label>
-                    Công suất máy bơm:
+                    Công suất máy bơm (W):
                     <input
                       type="number"
                       name="pumpCapacity"
@@ -321,4 +327,4 @@ const PondForm = () => {
   );
 };
 
-export default PondForm;
+export default ManageKoiAndTank;

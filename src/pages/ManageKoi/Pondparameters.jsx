@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./Pondparameters.css"; // Đảm bảo rằng tệp CSS được cập nhật với các class name mới
+import "./Pondparameters.css";
 const PondParameters = () => {
   const [ponds, setPonds] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModals, setShowModals] = useState({}); // Quản lý trạng thái mở modal
 
-  // Fetch all ponds data from the API
   useEffect(() => {
     const fetchPonds = async () => {
       const token = localStorage.getItem("token");
@@ -36,9 +35,16 @@ const PondParameters = () => {
     fetchPonds();
   }, []);
 
-  // Handle input changes for the water parameters
   const handleWaterParameterChange = (pondId, e) => {
     const { name, value } = e.target;
+
+    // Kiểm tra nếu giá trị là số và không âm
+    if (value < 0) {
+      alert("Giá trị không thể là số âm.");
+      return;
+    }
+
+    // Cập nhật state nếu giá trị hợp lệ
     setPonds((prevPonds) =>
       prevPonds.map((pond) =>
         pond.id === pondId
@@ -54,7 +60,6 @@ const PondParameters = () => {
     );
   };
 
-  // Save pond data to the API
   const handleSavePond = async (pondId) => {
     const pondToSave = ponds.find((pond) => pond.id === pondId);
     const token = localStorage.getItem("token");
@@ -207,7 +212,6 @@ const PondParameters = () => {
                   <h2>Nhập Thông Số Nước cho {pond.name}</h2>
                   <div className="input-container">
                     {" "}
-                    {/* New container for input fields */}
                     <div className="input-group">
                       <label>Nhiệt độ (°C)</label>
                       <input
@@ -261,7 +265,6 @@ const PondParameters = () => {
                   </div>
                   <div className="input-container">
                     {" "}
-                    {/* Additional input row */}
                     <div className="input-group">
                       <label>nO3 (mg/L)</label>
                       <input

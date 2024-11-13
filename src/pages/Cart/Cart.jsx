@@ -6,6 +6,8 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
+  const [showPaymentModal, setShowPaymentModal] = useState(false); // Quản lý trạng thái modal thanh toán
+  const [paymentUrl, setPaymentUrl] = useState(""); // Lưu URL thanh toán
   const navigate = useNavigate(); // Hook để chuyển hướng
 
   useEffect(() => {
@@ -57,9 +59,7 @@ const Cart = () => {
       orderDetails,
     };
 
-    // Lấy accessToken từ localStorage
     const accessToken = localStorage.getItem("token");
-    console.log(accessToken);
     try {
       const response = await fetch(
         "https://koi-care-server.azurewebsites.net/api/order/create",
@@ -74,12 +74,12 @@ const Cart = () => {
       );
 
       if (response.ok) {
+        const data = await response.json();
         alert("Đơn hàng đã được gửi thành công!");
-        setCartItems([]);
-        localStorage.removeItem("cartItems");
-
-        // Chuyển hướng đến trang thanh toán thành công
-        navigate("/success");
+        setPaymentUrl(data.paymentUrl); // Lưu paymentUrl
+        setShowPaymentModal(true); // Hiển thị modal thanh toán
+        setCartItems([]); // Xóa giỏ hàng
+        localStorage.removeItem("cartItems"); // Xóa giỏ hàng trong localStorage
       } else {
         alert("Có lỗi xảy ra khi gửi đơn hàng.");
       }
@@ -87,6 +87,18 @@ const Cart = () => {
       console.error("Error:", error);
       alert("Lỗi khi kết nối đến server.");
     }
+  };
+
+  // Xử lý chọn phương thức thanh toán
+  const handlePaymentChoice = (paymentMethod) => {
+    if (paymentMethod === "transfer") {
+      // Chuyển hướng người dùng đến URL thanh toán
+      window.location.href = paymentUrl;
+    } else {
+      // Nếu chọn COD, chuyển hướng đến trang thành công hoặc xử lý thêm nếu cần
+      navigate("/success");
+    }
+    setShowPaymentModal(false); // Đóng modal sau khi chọn phương thức thanh toán
   };
 
   return (
@@ -134,6 +146,27 @@ const Cart = () => {
         </>
       ) : (
         <p>Giỏ hàng của bạn trống!</p>
+      )}
+
+      {/* Modal thanh toán */}
+      {showPaymentModal && (
+        <div className="payment-modal">
+          <div className="modal-body">
+            <h3>Chọn phương thức thanh toán</h3>
+            <button
+              className="payment-method-button"
+              onClick={() => handlePaymentChoice("cod")}
+            >
+              Thanh toán khi nhận hàng (COD)
+            </button>
+            <button
+              className="payment-method-button"
+              onClick={() => handlePaymentChoice("transfer")}
+            >
+              Chuyển khoản
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

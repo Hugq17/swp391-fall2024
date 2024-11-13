@@ -1,0 +1,196 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    /* Thêm màu nền cho toàn bộ trang */
+}
+
+.form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.form-container {
+    background: #ffffff;
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+    /* Giới hạn chiều rộng tối đa */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4d4f;
+    color: #fff;
+    border: none;
+    border-radius: 200px;
+    padding: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 30px;
+    /* Chiều rộng của nút */
+    height: 30px;
+    /* Chiều cao của nút (cần bằng chiều rộng để tạo hình tròn) */
+    font-size: 10px;
+}
+
+.close-button:hover {
+    background: #cc0000;
+}
+
+h1 {
+    color: #333;
+    font-size: 1.8rem;
+    /* Kích thước chữ tiêu đề lớn hơn */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    /* Khoảng cách giữa các hàng */
+}
+
+label {
+    flex: 1;
+    margin: 20px;
+}
+
+label:last-child {
+    margin-right: 0;
+    /* Bỏ khoảng cách ở trường cuối cùng */
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.2s ease-in-out;
+}
+
+input:focus,
+select:focus {
+    border-color: #007bff;
+    /* Thay đổi màu viền khi focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.save-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+.add-pond-button,
+.parameters-button {
+    padding: 10px 20px;
+    /* Kích thước padding cho nút */
+    border: none;
+    /* Bỏ viền */
+    border-radius: 5px;
+    /* Bo góc */
+    cursor: pointer;
+    /* Con trỏ chuột sẽ hiển thị khi di chuột qua nút */
+    font-size: 16px;
+    /* Kích thước chữ */
+    transition: background-color 0.3s, transform 0.3s;
+    /* Hiệu ứng chuyển tiếp khi hover */
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.parameters-chart-button {
+    padding: 10px 20px;
+    /* Kích thước padding cho nút */
+    border: none;
+    /* Bỏ viền */
+    border-radius: 5px;
+    /* Bo góc */
+    cursor: pointer;
+    /* Con trỏ chuột sẽ hiển thị khi di chuột qua nút */
+    font-size: 16px;
+    /* Kích thước chữ */
+    transition: background-color 0.3s, transform 0.3s;
+    /* Hiệu ứng chuyển tiếp khi hover */
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.parameters-chart-button {
+    background-color: #9C27B0;
+    /* Màu nền xanh dương */
+    color: white;
+    /* Màu chữ trắng */
+    margin-left: 10px;
+    /* Khoảng cách giữa hai nút */
+}
+
+.parameters-chart-button:hover {
+    background-color: #A569BD;
+    /* Màu nền khi hover */
+    transform: translateY(-2px);
+    /* Hiệu ứng nâng khi hover */
+}
+
+.add-pond-button {
+    background-color: #4CAF50;
+    /* Màu nền xanh lá cây */
+    color: white;
+    /* Màu chữ trắng */
+}
+
+.add-pond-button:hover {
+    background-color: #45a049;
+    /* Màu nền khi hover */
+    transform: translateY(-2px);
+    /* Hiệu ứng nâng khi hover */
+}
+
+.parameters-button {
+    background-color: #008CBA;
+    /* Màu nền xanh dương */
+    color: white;
+    /* Màu chữ trắng */
+    margin-left: 10px;
+    /* Khoảng cách giữa hai nút */
+}
+
+.parameters-button:hover {
+    background-color: #007bb5;
+    /* Màu nền khi hover */
+    transform: translateY(-2px);
+    /* Hiệu ứng nâng khi hover */
+}
+
+/* Responsive Design */
