@@ -13,11 +13,10 @@ const KoiFishTable = ({ pondId }) => {
   const [weight, setWeight] = useState("");
   const [growthData, setGrowthData] = useState(null);
   const [feedingInfo, setFeedingInfo] = useState(null);
-
   const fetchFeedingInfo = async (pondId) => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("No token found! Please login first.");
+      alert("Vui lòng đăng nhập để thực hiện chức năng này!!!");
       return;
     }
 
@@ -35,6 +34,25 @@ const KoiFishTable = ({ pondId }) => {
       console.error("Error fetching feeding information", error);
       alert("Could not retrieve feeding information.");
     }
+  };
+
+  const calculateFeedingForFish = (fish) => {
+    if (!feedingInfo) return 0;
+
+    // Tính lượng thức ăn cho cá riêng biệt bằng cách nhân weightPercent với weight của cá
+    const feedingAmount = feedingInfo.weightPercent * fish.weight;
+    return feedingAmount.toFixed(2); // Trả về lượng thức ăn cho cá làm tròn đến 2 chữ số thập phân
+  };
+
+  const calculateTotalFeeding = () => {
+    if (!feedingInfo) return 0;
+
+    // Tính tổng lượng thức ăn cho tất cả các cá trong hồ
+    const totalFeedingAmount = koiFish.reduce((total, fish) => {
+      return total + feedingInfo.weightPercent * fish.weight;
+    }, 0);
+
+    return totalFeedingAmount.toFixed(2); // Trả về tổng lượng thức ăn làm tròn đến 2 chữ số thập phân
   };
 
   useEffect(() => {
@@ -288,35 +306,29 @@ const KoiFishTable = ({ pondId }) => {
       {feedingInfo && (
         <div className="modal">
           <div className="modal-content">
-            <h3>Thông tin lượng thức ăn cho hồ</h3>
-            <p>
-              <strong>ID:</strong> {feedingInfo.id}
-            </p>
-            <p>
-              <strong>Khoảng tuổi:</strong> {feedingInfo.ageRange}
-            </p>
-            <p>
-              <strong>Mô tả khoảng tuổi:</strong>{" "}
-              {feedingInfo.ageRangeDescription}
-            </p>
-            <p>
-              <strong>Tỷ lệ trọng lượng:</strong>
-              {/* Hiển thị kết quả nhân weightPercent với weight của tất cả cá trong hồ */}
-              {koiFish
-                .reduce(
-                  (total, fish) =>
-                    total + (feedingInfo.weightPercent * fish.weight) / 100,
-                  0
-                )
-                .toFixed(2)}{" "}
-              g
-            </p>
-            <p>
-              <strong>Mô tả thức ăn:</strong> {feedingInfo.foodDescription}
-            </p>
-            <p>
-              <strong>Tần suất hàng ngày:</strong> {feedingInfo.dailyFrequency}
-            </p>
+            <h3>Thông tin lượng thức ăn cho các cá trong hồ</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Tên cá</th>
+                  <th>Trọng lượng (g)</th>
+                  <th>Lượng thức ăn cần thiết (g)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {koiFish.map((fish) => (
+                  <tr key={fish.id}>
+                    <td>{fish.name}</td>
+                    <td>{fish.weight}</td>
+                    <td>{calculateFeedingForFish(fish)} g</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <h4>
+              <strong>Tổng lượng thức ăn cho tất cả cá:</strong>{" "}
+              {calculateTotalFeeding()} g
+            </h4>
             <button onClick={() => setFeedingInfo(null)}>Đóng</button>
           </div>
         </div>
