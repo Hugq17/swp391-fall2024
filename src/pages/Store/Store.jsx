@@ -102,16 +102,18 @@ function ProductStore({ onCartUpdate }) {
         <div className="product-list">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <div key={product.id} className="product-item">
-                <div className="product-image">
-                  {product.imageUrl ? (
-                    <img src={product.imageUrl} alt={product.name} />
-                  ) : (
-                    <p>Không có ảnh</p>
-                  )}
+              <div className="product-item">
+                <div className="product-header">
+                  <div className="product-image">
+                    {product.imageUrl ? (
+                      <img src={product.imageUrl} alt={product.name} />
+                    ) : (
+                      <p>Không có ảnh</p>
+                    )}
+                  </div>
+                  <h4 className="product-name">{product.name}</h4>
                 </div>
                 <div className="product-info">
-                  <h4>{product.name}</h4>
                   <p>{product.description}</p>
                   <p className="product-price">
                     Giá: {product.price.toLocaleString("vi-VN")} VND
