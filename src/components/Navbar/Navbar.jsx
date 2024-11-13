@@ -9,7 +9,9 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isOrderDropdownOpen, setIsOrderDropdownOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,19 +38,41 @@ const Navbar = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleKoiManagementClick = () => {
+  const toggleOrderDropdown = async () => {
+    if (!isOrderDropdownOpen) {
+      await fetchOrders();
+    }
+    setIsOrderDropdownOpen(!isOrderDropdownOpen);
+  };
+
+  const fetchOrders = async () => {
     const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
-    } else {
-      navigate("/Managekoiandtank");
-      setMenu("Quản lý cá Koi");
+    try {
+      const response = await fetch(
+        "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/order/get-all",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setOrders(data.orders);
+      } else {
+        alert("Lỗi khi tải danh sách đơn hàng.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 
-  // Tính tổng số lượng sản phẩm trong giỏ hàng
   const getTotalItemsInCart = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
+  const handleManageOrdersClick = () => {
+    navigate("/manageOrders");
   };
 
   return (
@@ -72,7 +96,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li
-          onClick={handleKoiManagementClick}
+          onClick={() => navigate("/Managekoiandtank")}
           className={menu === "Quản lý cá Koi" ? "active" : ""}
         >
           <Link to="/Managekoiandtank" className="navbar-link">
@@ -102,6 +126,9 @@ const Navbar = () => {
             </span>
             {isDropdownOpen && (
               <div className="dropdown-menu">
+                <button onClick={handleManageOrdersClick}>
+                  Quản lý đơn hàng
+                </button>
                 <button onClick={handleLogout}>Đăng xuất</button>
               </div>
             )}

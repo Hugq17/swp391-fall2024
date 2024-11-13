@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import "./SuccessPage.css";
 const SuccessPage = () => {
   return (
     <div className="success-container">

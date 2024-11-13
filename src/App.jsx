@@ -14,6 +14,7 @@ import SuccessPage from "./pages/Cart/SuccessPage";
 import Footer from "./components/Footer/Footer";
 import "./App.css";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import ManageOrders from "./pages/Orders/Orders";
 const App = () => {
   return (
     <div className="app">
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/manageOrders" element={<ManageOrders />} />
         </Routes>
       </div>
       <Footer />

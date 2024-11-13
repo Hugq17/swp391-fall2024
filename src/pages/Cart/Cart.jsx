@@ -43,7 +43,7 @@ const Cart = () => {
     const accessToken = localStorage.getItem("token");
     try {
       const response = await fetch(
-        "https://koi-care-server.azurewebsites.net/api/order/create",
+        "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/order/create",
         {
           method: "POST",
           headers: {
