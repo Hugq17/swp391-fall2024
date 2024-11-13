@@ -34,7 +34,7 @@ const ManageFish = () => {
 
       try {
         const response = await axios.get(
-          "https://koi-care-server.azurewebsites.net/api/ponds",
+          "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/ponds",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -57,13 +57,13 @@ const ManageFish = () => {
     const fetchKoiTypes = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("No token found! Please login first.");
+        alert("Vui lòng đăng nhập để thực hiện chức năng này.");
         return;
       }
 
       try {
         const response = await axios.get(
-          "https://koi-care-server.azurewebsites.net/api/koifish/get-all-koi-types",
+          "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/koifish/get-all-koi-types",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -102,7 +102,7 @@ const ManageFish = () => {
 
     try {
       const response = await axios.post(
-        "https://koi-care-server.azurewebsites.net/api/image/upload",
+        "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/image/upload",
         formData,
         {
           headers: {
@@ -122,7 +122,7 @@ const ManageFish = () => {
   const handleAddFish = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("No token found! Please login first.");
+      alert("Vui lòng đăng nhập để thực hiện chức năng này.");
       return;
     }
 
@@ -147,7 +147,7 @@ const ManageFish = () => {
 
     try {
       const response = await axios.post(
-        "https://koi-care-server.azurewebsites.net/api/koifish/create",
+        "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/koifish/create",
         fishData,
         {
           headers: {

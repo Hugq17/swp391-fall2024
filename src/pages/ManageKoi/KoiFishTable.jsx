@@ -32,7 +32,7 @@ const KoiFishTable = ({ pondId }) => {
       setFeedingInfo(response.data);
     } catch (error) {
       console.error("Error fetching feeding information", error);
-      alert("Could not retrieve feeding information.");
+      alert("Không thể truy xuất thông tin cho ăn.");
     }
   };
 
@@ -59,13 +59,13 @@ const KoiFishTable = ({ pondId }) => {
     const fetchKoiFish = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("No token found! Please login first.");
+        alert("Vui lòng đăng nhập để thực hiện chức năng này!.");
         return;
       }
 
       try {
         const response = await axios.get(
-          `https://koi-care-server.azurewebsites.net/api/koifish/get-all-fish/${pondId}`,
+          `https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/koifish/get-all-fish/${pondId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -92,13 +92,13 @@ const KoiFishTable = ({ pondId }) => {
 
   const handleUpdateFish = async () => {
     if (!length || !weight) {
-      alert("Please enter both length and weight.");
+      alert("Vui lòng nhập chiều cao hoặc cân nặng.");
       return;
     }
 
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("No token found! Please login first.");
+      alert("Vui lòng đăng nhập để thực hiện chức năng này.");
       return;
     }
 
@@ -119,7 +119,7 @@ const KoiFishTable = ({ pondId }) => {
         }
       );
       if (response.status === 200) {
-        alert("Fish updated successfully!");
+        alert("Cập nhật thành công!!!");
         setShowFormModal(false);
         setKoiFish((prev) =>
           prev.map((fish) =>
@@ -135,7 +135,7 @@ const KoiFishTable = ({ pondId }) => {
       }
     } catch (error) {
       console.error("There was an error updating the fish!", error);
-      alert("Error updating fish.");
+      alert("Lỗi cập nhật cá");
     }
   };
 
@@ -143,7 +143,7 @@ const KoiFishTable = ({ pondId }) => {
     setSelectedFish(fish);
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("No token found! Please login first.");
+      alert("Vui lòng đăng nhập để thực hiện chức năng này.");
       return;
     }
 
@@ -160,7 +160,7 @@ const KoiFishTable = ({ pondId }) => {
       setShowChartModal(true); // Show chart modal
     } catch (error) {
       console.error("Error fetching growth data", error);
-      alert("Could not retrieve growth data.");
+      alert("Không thể truy xuất dữ liệu tăng trưởng.");
     }
   };
 

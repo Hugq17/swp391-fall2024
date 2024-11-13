@@ -9,7 +9,7 @@ const Content = () => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get(
-          "https://koi-care-server.azurewebsites.net/api/blogs/get-all"
+          "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/blogs/get-all"
         );
         setBlogs(response.data.blogs.slice(0, 5)); // Lấy 5 bài viết đầu tiên
       } catch (error) {

@@ -62,7 +62,7 @@ const ManageKoiAndTank = () => {
 
     try {
       const response = await axios.post(
-        "https://koi-care-server.azurewebsites.net/api/image/upload",
+        "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/image/upload",
         formData,
         {
           headers: {
@@ -83,7 +83,7 @@ const ManageKoiAndTank = () => {
 
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("No token found! Please login first.");
+      alert("Vui lòng đăng nhập để thực hiện chức năng này.");
       return;
     }
 
@@ -117,7 +117,7 @@ const ManageKoiAndTank = () => {
         }
       );
 
-      alert("Pond saved successfully!");
+      alert("Thành công!");
       console.log(response.data);
       setIsOpen(false);
       setFormData({

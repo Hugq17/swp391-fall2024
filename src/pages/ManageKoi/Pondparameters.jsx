@@ -10,13 +10,13 @@ const PondParameters = () => {
     const fetchPonds = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("No token found! Please login first.");
+        alert("Vui lòng đăng nhập để thực hiện chức năng này.");
         return;
       }
 
       try {
         const response = await axios.get(
-          "https://koi-care-server.azurewebsites.net/api/ponds",
+          "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/ponds",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -26,7 +26,7 @@ const PondParameters = () => {
         setPonds(response.data.ponds);
       } catch (error) {
         console.error("Error fetching ponds:", error);
-        alert("Error fetching ponds. Please try again.");
+        alert("Lỗi hiển thị thông số hồ");
       } finally {
         setLoading(false);
       }
@@ -64,13 +64,13 @@ const PondParameters = () => {
     const pondToSave = ponds.find((pond) => pond.id === pondId);
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("No token found! Please login first.");
+      alert("Vui lòng đăng nhập để thực hiện chức năng này!!!");
       return;
     }
 
     try {
       const response = await axios.post(
-        "https://koi-care-server.azurewebsites.net/api/ponds/save",
+        "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/ponds/save",
         {
           ...pondToSave,
           waterParameter: { ...pondToSave.waterParameter },
@@ -82,12 +82,12 @@ const PondParameters = () => {
         }
       );
       if (response.status === 200) {
-        alert("Pond data saved successfully!");
+        alert("Cập nhật dữ liễu thành công!");
         setShowModals((prev) => ({ ...prev, [pondId]: false }));
       }
     } catch (error) {
       console.error("Error saving pond data:", error);
-      alert("An error occurred while saving pond data.");
+      alert("Đã cập nhật hồ thành công");
     }
   };
 

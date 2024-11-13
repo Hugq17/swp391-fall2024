@@ -14,12 +14,12 @@ const BlogDetail = () => {
     const fetchBlogDetail = async () => {
       try {
         const response = await axios.get(
-          `https://koi-care-server.azurewebsites.net/api/blogs/${id}`
+          `https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/blogs/${id}`
         );
         setBlog(response.data);
       } catch (error) {
         console.error("Error fetching blog detail:", error);
-        alert("Error fetching blog detail. Please try again.");
+        alert("Lỗi hiển thị chi tiết bài blog vui lòng thử lại.");
       } finally {
         setLoading(false);
       }

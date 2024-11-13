@@ -31,13 +31,13 @@ const KoiInfo = () => {
     const fetchPonds = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("No token found! Please login first.");
+        alert("Vui lòng đăng nhập để thực hiện chức năng này!!!");
         return;
       }
 
       try {
         const response = await axios.get(
-          "https://koi-care-server.azurewebsites.net/api/ponds",
+          "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/ponds",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ const KoiInfo = () => {
         setPonds(response.data.ponds);
       } catch (error) {
         console.error("Error fetching ponds:", error);
-        alert("Error fetching ponds. Please try again.");
+        alert("Lỗi tải hồ, vui lòng thử lại");
       } finally {
         setLoading(false);
       }
@@ -153,6 +153,7 @@ const CombinedParameterChart = ({ pond }) => {
           display: true,
           text: "Time",
         },
+        reverse: true, // Thêm dòng này để đảo ngược trục X
       },
       y: {
         title: {

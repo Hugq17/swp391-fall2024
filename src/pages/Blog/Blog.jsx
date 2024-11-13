@@ -11,7 +11,7 @@ const BlogList = () => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get(
-          "https://koi-care-server.azurewebsites.net/api/blogs/get-all"
+          "https://koi-care-at-home-server-h3fyedfeeecdg7fh.southeastasia-01.azurewebsites.net/api/blogs/get-all"
         );
         setBlogs(response.data.blogs);
       } catch (error) {
